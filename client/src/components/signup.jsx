@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "@/context/authContext";
 import { MdEmail, MdLock } from "react-icons/md"; // Import the email and lock icons
@@ -8,12 +8,13 @@ import { FaUser } from "react-icons/fa";
 import { FaPenNib } from "react-icons/fa6";
 import { useToast } from "@/components/../hooks/use-toast";
 // import { Button } from "@/components/ui/button"
-import { ToastAction } from "@/components/ui/toast";
-import { ToastContainer, toast } from "react-toastify";
-const notify = () => toast();
+// import { ToastAction } from "@/components/ui/toast";
+// import { ToastContainer, toast } from "react-toastify";
+// const notify = () => toast();
 
 const SignUp = () => {
-  const { toast } = useToast();
+  // const { toast } = useToast();
+  const navigate = useNavigate();
 
   //profession
   const [name, setName] = useState("");
@@ -23,13 +24,15 @@ const SignUp = () => {
   const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
 
-  const { authorized, setAuthorized } = useContext(Context);
+  // const { authorized, setAuthorized } = useContext(Context);
 
-  const onSubmit = async (e) => {
+  // navigate("/login");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/user/register", // replace with your backend registration URL
+        "http://localhost:5000/api/v1/user/register",
         { name, email, password, profession },
         {
           headers: {
@@ -40,14 +43,15 @@ const SignUp = () => {
       );
       // console.log(message);
       console.log(data);
-
+      // setAuthorized(true);
+      navigate("/login");
       setMessage(data.message);
       setDescription(data.description);
-      setAuthorized(true);
       setName("");
       setEmail("");
       setPassword("");
       setProfession("");
+      // <Navigate to="/login" />;
     } catch (error) {
       console.error("error", error);
       setAuthorized(false);
@@ -58,13 +62,12 @@ const SignUp = () => {
   // console.log(message);
   // console.log(description);
 
-  if (authorized) {
-    return <Navigate to="/" />;
-  }
+  // if (authorized) {
+  //   navigate("/login");
+  // }
 
   return (
     <div className="w-full max-h-screen flex">
-      {/* Left Section: Image */}
       <div className="w-1/2 md:block hidden flex items-center justify-center">
         <img
           src="/register.png"
@@ -72,12 +75,15 @@ const SignUp = () => {
           className="object-cover h-full"
         />
       </div>
-      {/* Right Section: Sign Up Form */}
       <div className="md:w-1/2 w-full  flex items-center justify-center">
         {/* {message ? toast({ message }) : null} */}
         <div className="max-w-md w-full p-8 space-y-8 bg-white shadow-lg rounded-lg">
           <h2 className="text-3xl font-extrabold text-gray-900">Sign Up</h2>
-          <form className="mt-8  space-y-8" onSubmit={onSubmit} method="POST">
+          <form
+            className="mt-8  space-y-8"
+            onSubmit={handleSubmit}
+            method="POST"
+          >
             <div className="rounded-md shadow-sm space-y-4">
               <div className="relative">
                 <label htmlFor="name" className="sr-only">
@@ -167,17 +173,18 @@ const SignUp = () => {
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md bg-[#2CA4AB]"
                 variant="outline"
-                onClick={() => {
-                  toast({
-                    title: { message },
-                    description: { description },
-                    // action: (
-                    //   // <ToastAction altText="Goto schedule to undo">
-                    //   //   Undo
-                    //   // </ToastAction>
-                    // ),
-                  });
-                }}
+
+                // onClick={() => {
+                //   toast({
+                //     title: { message },
+                //     description: { description },
+                //     // action: (
+                //     //   // <ToastAction altText="Goto schedule to undo">
+                //     //   //   Undo
+                //     //   // </ToastAction>
+                //     // ),
+                //   });
+                // }}
               >
                 Sign Up
               </Button>
@@ -186,7 +193,10 @@ const SignUp = () => {
           <div className="text-center">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-[#2CA4AB] hover:underline">
+              <Link
+                to="/signup/login"
+                className="text-[#2CA4AB] hover:underline"
+              >
                 Login here
               </Link>
             </p>

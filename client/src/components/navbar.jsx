@@ -79,7 +79,9 @@ const Navbar = () => {
           <div className="flex space-x-4 items-center">
             <Link
               to="/login"
-              className={`text-white md:block hidden font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
+              className={`text-white ${
+                authorized ? "md:hidden" : "block"
+              }  md:block hidden font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
                 background
                   ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
                   : "bg-slate-900 shadow-sm shadow-white"

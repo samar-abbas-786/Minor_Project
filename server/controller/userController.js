@@ -33,7 +33,6 @@ const register = async (req, res) => {
       description: "There is some issue in signup",
     });
   }
-  //   sendToken(user, 201, res, "User Registered!");
 };
 
 const login = async (req, res) => {
@@ -52,7 +51,7 @@ const login = async (req, res) => {
   }
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return res
+    return resṭ
       .status(400)
       .json({ message: "Failed", description: "Password Did Not Match" });
   }
