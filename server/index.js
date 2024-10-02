@@ -5,12 +5,14 @@ const dbConnection = require("./database/db");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const instructionRouter = require("./routes/instructionRoutes");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
 // Establish database connection
 dbConnection();
+app.use(express.json());
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -29,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/instruction", instructionRouter);
 
 app.listen(PORT, () => {
   console.log(`App is Running at ${PORT}`);

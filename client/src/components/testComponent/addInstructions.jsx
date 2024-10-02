@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const AddInstructions = () => {
@@ -6,17 +6,20 @@ const AddInstructions = () => {
   const [inst, setInst] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
-  //   const onHandleInput = (e) => {
-  //     setInputValue(e.tartget.value);
-  //   };
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    const { data } = await axios.post(
+      "http://localhost:5000/api/v1/instruction/addInstruction",
+      { instruction: inst },
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(data);
 
-  const onHandleSubmit = async () => {
-    const { data } = await axios.post("url", [inst], {
-      withCredentials: true,
-    });
     setCount(1);
     setInputValue("");
-    setInst("");
+    setInst([]);
   };
 
   const handleAdd = () => {
@@ -26,47 +29,66 @@ const AddInstructions = () => {
   };
 
   return (
-    <div className="text-center flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-semibold text-center mt-5">
-        Add Instructions
-      </h1>
+    <div className="min-h-screen flex justify-center items-center bg-gray-100 py-10">
+      <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-4xl flex space-x-12">
+        <div className="w-1/2 flex flex-col space-y-6">
+          <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+            Add Instructions
+          </h1>
+          <form>
+            <div className="flex items-center space-x-3">
+              <label
+                className="text-2xl font-semibold text-gray-700"
+                htmlFor="inp"
+              >
+                {count}.
+              </label>
+              <input
+                id="inp"
+                value={inputValue}
+                name="instruction"
+                onChange={(e) => setInputValue(e.target.value)}
+                className="h-12 w-full p-4 bg-gray-200 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                type="text"
+                placeholder="Enter instruction"
+              />
+              <button
+                onClick={handleAdd}
+                type="button"
+                className="bg-green-600 px-6 py-3 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+              >
+                Add
+              </button>
+            </div>
 
-      <form>
-        <div id="testDiv" className={`space-x-3`}>
-          <label className="text-xl font-bold" htmlFor="ins1">
-            {count}
-          </label>
-          <input
-            id="inp"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="h-[7vh] w-[60vw] bg-slate-200 rounded-md"
-            type="text"
-          />
-          <button
-            onClick={handleAdd}
-            className="bg-green-500 px-4 py-1 text-white font-serif rounded-md"
-          >
-            Add
-          </button>
+            <button
+              onClick={onHandleSubmit}
+              className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition mt-6"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-        <div className=" mt-3 w-[60vw]  text-lg font-mono  flex items-center justify-center  rounded-md">
-          <p className="mt-3" id="Added">
+
+        <div className="w-1/2 space-y-4">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Added Instructions:
+          </h2>
+          <div className="flex flex-col space-y-2">
             {inst.map((instruction, index) => (
-              <div key={index}>
-                {index + 1}. {instruction}
+              <div key={index} className="flex items-center space-x-2">
+                <span className="text-xl font-medium text-gray-700">
+                  {index + 1}.
+                </span>
+                <span className="text-lg font-mono text-gray-600">
+                  {instruction}
+                </span>
               </div>
             ))}
-          </p>
+          </div>
         </div>
-      </form>
-      <button
-        onClick={onHandleSubmit}
-        className="px-3 py-1 bg-green-600 text-white font-mono rounded-md"
-        type="submit"
-      >
-        Submit
-      </button>
+      </div>
     </div>
   );
 };

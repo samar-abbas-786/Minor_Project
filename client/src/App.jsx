@@ -6,6 +6,7 @@ import Login from "./components/login";
 import Layout from "./components/layout";
 import PageNotFound from "./components/pageNotFound";
 import AddInstructions from "./components/testComponent/addInstructions";
+import ShowInstructions from "./components/testComponent/showInstructions.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/AddInstructions" element={<AddInstructions />} />
+          <Route path="/ShowInstructions" element={<ShowInstructions />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

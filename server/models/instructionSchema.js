@@ -5,9 +5,10 @@ const instructionSchema = new mongoose.Schema({
     type: [String],
     required: [true, "Instruction not included"],
   },
-  upLoadedBy: {
+  uploadedBy: {
     type: mongoose.Schema.ObjectId,
     ref: "Professor",
+    default: "66fbd49b3ada04456682c58e",
   },
 });
 
