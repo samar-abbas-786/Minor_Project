@@ -34,37 +34,37 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-10 items-center ">
             <Link
               to="/"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Home
             </Link>
             <Link
               to="/courses"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Courses
             </Link>
             <Link
               to="/video-call"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Video Call
             </Link>
             <Link
               to="/tests"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Tests
             </Link>
             <Link
               to="/teachers"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Teachers
             </Link>
             <Link
               to="/about"
-              className="text-white font-semibold text-md hover:text-slate-900 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-semibold text-md hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               About
             </Link>
