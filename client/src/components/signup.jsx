@@ -193,10 +193,7 @@ const SignUp = () => {
           <div className="text-center">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <Link
-                to="/signup/login"
-                className="text-[#2CA4AB] hover:underline"
-              >
+              <Link to="/login" className="text-[#2CA4AB] hover:underline">
                 Login here
               </Link>
             </p>

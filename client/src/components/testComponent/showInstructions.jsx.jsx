@@ -28,8 +28,7 @@ const ShowInstructions = () => {
             key={index}
             className="text-lg text-gray-700 mb-4 p-4 border-l-4 border-green-500 hover:bg-slate-200 transition-all"
           >
-            <span className="font-semibold ">{index + 1}.</span>{" "}
-            {data}
+            <span className="font-semibold ">{index + 1}.</span> {data}
           </div>
         ))
       ) : (

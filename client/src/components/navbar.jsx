@@ -7,6 +7,7 @@ import { FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { FaUserLarge } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   //2CA4AB
@@ -69,42 +70,50 @@ const Navbar = () => {
               About
             </Link>
           </div>
-          {/* <Link
-            className={`${background ? "text-white" : "text-white"} text-xl `}
-            onClick={() => setBackground(!background)}
-          >
-            {background ? <IoSunny /> : <FaMoon />}
-          </Link> */}
-          {/* Action Buttons */}
-          <div className="flex space-x-4 items-center">
-            <Link
-              to="/login"
-              className={`text-white ${
-                authorized ? "md:hidden" : "block"
-              }  md:block hidden font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
-                background
-                  ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
-                  : "bg-slate-900 shadow-sm shadow-white"
-              } hover:from-[#262626] hover:to-[#1E1E1E] transition-all duration-500 ease-in-out transform hover:scale-105 shadow-lg`}
-            >
-              Login
-            </Link>
 
-            <Link
-              to="/signup"
-              className={`text-[#2CA4AB] font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
-                background
-                  ? "bg-gradient-to-r from-white to-gray-100"
-                  : "bg-slate-800 shadow-sm shadow-white text-slate-50"
-              } hover:from-gray-50 hover:to-white transition-all duration-500 ease-in-out transform hover:scale-105 shadow-lg`}
+          <div className="flex space-x-4 items-center">
+            <div
+              className={`${
+                authorized ? "hidden" : "block"
+              } flex space-x-4 items-center`}
             >
-              {!authorized ? (
-                "Register"
-              ) : (
-                <Link>
-                  <FaUserLarge />
-                </Link>
-              )}
+              <Link
+                to="/login"
+                className={`text-white ${
+                  authorized ? "md:hidden" : "block"
+                }  md:block hidden font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
+                  background
+                    ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
+                    : "bg-slate-900 shadow-sm shadow-white"
+                } hover:from-[#262626] hover:to-[#1E1E1E] transition-all duration-500 ease-in-out transform hover:scale-105 shadow-lg`}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/signup"
+                className={`text-[#2CA4AB] font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
+                  background
+                    ? "bg-gradient-to-r from-white to-gray-100"
+                    : "bg-slate-800 shadow-sm shadow-white text-slate-50"
+                } hover:from-gray-50 hover:to-white transition-all duration-500 ease-in-out transform hover:scale-105 shadow-lg`}
+              >
+                {!authorized ? (
+                  "Register"
+                ) : (
+                  <Link>
+                    <FaUserLarge />
+                  </Link>
+                )}
+              </Link>
+            </div>
+            <Link
+              to="/profile"
+              className={`${
+                authorized ? "block" : "hidden"
+              } text-4xl text-white`}
+            >
+              <FaUserCircle />
             </Link>
             <Link
               className={`${background ? "text-white" : "text-white"} text-xl `}

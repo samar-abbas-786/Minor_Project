@@ -4,7 +4,7 @@ export const Context = createContext();
 
 const AppWrapper = ({ children }) => {
   const [authorized, setAuthorized] = useState(false);
-  const [background, setBackground] = useState(true);
+  const [background, setBackground] = useState(false);
 
   return (
     <Context.Provider
