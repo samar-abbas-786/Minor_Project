@@ -7,6 +7,8 @@ import Layout from "./components/layout";
 import PageNotFound from "./components/pageNotFound";
 import AddInstructions from "./components/testComponent/addInstructions";
 import ShowInstructions from "./components/testComponent/showInstructions.jsx";
+import AddQuestion from "./components/AddQuestion";
+import StudentTest from "./components/StudentTest";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/AddInstructions" element={<AddInstructions />} />
           <Route path="/ShowInstructions" element={<ShowInstructions />} />
+          <Route path="/add-question" element={<AddQuestion />} />
+          <Route path="/take-test" element={<StudentTest />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

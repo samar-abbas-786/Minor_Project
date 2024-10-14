@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const instructionRouter = require("./routes/instructionRoutes");
-const questionRouter = require("./routes/questionRoutes");
+const questionRoutes = require("./routes/questionRoutes");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/instruction", instructionRouter);
-app.use("/api/v1/question", questionRouter);
+app.use("/api/v1/questions", questionRoutes);
 
 app.listen(PORT, () => {
   console.log(`App is Running at ${PORT}`);

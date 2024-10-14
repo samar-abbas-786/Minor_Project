@@ -2,16 +2,21 @@ const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
   question: {
-    type: [String],
+    type: String,
     required: [true, "Please Provide the Question"],
   },
   option: {
-    type: mongoose.Schema.Types.Mixed,
+    type: [String],
     required: [true, "Please Provide the options"],
   },
   correctOption: {
-    type: mongoose.Schema.Types.Mixed,
+    type: String,
     required: [true, "Please Provide the correct option"],
+  },
+  marks: {
+    type: Number,
+    required: true,
+    default: 1,
   },
   createdBy: {
     type: mongoose.Schema.ObjectId,
