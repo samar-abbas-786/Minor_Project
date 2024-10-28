@@ -1,6 +1,5 @@
 const Question = require("../models/questionSchema");
 
-// Add a question
 exports.addQuestion = async (req, res) => {
   const { question, option, correctOption, marks } = req.body;
 
@@ -30,7 +29,6 @@ exports.addQuestion = async (req, res) => {
   }
 };
 
-// Get all questions for students to attempt
 exports.getAllQuestions = async (req, res) => {
   try {
     const questions = await Question.find();

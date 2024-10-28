@@ -22,7 +22,6 @@ const AddQuestion = () => {
         }
       );
 
-      // Add the newly added question to the right side list
       setQuestionsList([
         ...questionsList,
         { question, options, correctOption, marks },
