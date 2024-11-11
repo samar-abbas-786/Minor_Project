@@ -8,15 +8,14 @@ const cors = require("cors");
 const instructionRouter = require("./routes/instructionRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const courseRoutes = require("./routes/courseRoutes");
+const path = require("path");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
-// Establish database connection
 dbConnection();
 app.use(express.json());
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -27,6 +26,7 @@ app.use(
     credentials: true,
   })
 );
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/", (req, res) => {
   res.send("Hello World");

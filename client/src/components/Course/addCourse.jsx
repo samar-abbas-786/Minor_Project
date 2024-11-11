@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [Code, setCode] = useState("");
   const [fileUrl, setFileUrl] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +13,7 @@ const AddCourse = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("Code", Code);
-    formData.append("fileUrl", fileUrl); 
+    formData.append("fileUrl", fileUrl);
 
     try {
       const response = await axios.post(

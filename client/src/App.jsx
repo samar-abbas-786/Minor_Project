@@ -10,6 +10,8 @@ import ShowInstructions from "./components/testComponent/showInstructions.jsx";
 import AddQuestion from "./components/AddQuestion";
 import StudentTest from "./components/StudentTest";
 import AddCourse from "./components/Course/addCourse";
+import ShowCourseList from "./components/Course/showCoursesList";
+import CourseDetails from "./components/Course/courseDetails";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/add-question" element={<AddQuestion />} />
           <Route path="/take-test" element={<StudentTest />} />
           <Route path="/AddCourse" element={<AddCourse />} />
+          <Route path="/showCourseList" element={<ShowCourseList />} />
+          <Route path="/course/:Code" element={<CourseDetails />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
