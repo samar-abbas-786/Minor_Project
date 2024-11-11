@@ -5,6 +5,7 @@ const courseSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Professor",
     required: true,
+    default: "66fbd49b3ada04456682c58e",
   },
   title: {
     type: String,
@@ -14,6 +15,7 @@ const courseSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  
 });
 
 const Course = mongoose.model("Course", courseSchema);

@@ -9,6 +9,7 @@ import AddInstructions from "./components/testComponent/addInstructions";
 import ShowInstructions from "./components/testComponent/showInstructions.jsx";
 import AddQuestion from "./components/AddQuestion";
 import StudentTest from "./components/StudentTest";
+import AddCourse from "./components/Course/addCourse";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/ShowInstructions" element={<ShowInstructions />} />
           <Route path="/add-question" element={<AddQuestion />} />
           <Route path="/take-test" element={<StudentTest />} />
+          <Route path="/AddCourse" element={<AddCourse />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
