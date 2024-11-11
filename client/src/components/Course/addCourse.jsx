@@ -3,19 +3,30 @@ import axios from "axios";
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [Code, setCode] = useState("");
-  const [file, setFile] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let course = await axios.post(
-      "http://localhost:5000/api/v1/course/addCourses",
-      { title, Code, file }
-    );
-    console.log(course);
 
-    console.log("Title:", title);
-    console.log("Code:", Code.toUpperCase());
-    console.log("File:", file);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("Code", Code);
+    formData.append("fileUrl", fileUrl); 
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/course/addCourses",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Course added successfully:", response.data);
+    } catch (error) {
+      console.error("Error adding course:", error);
+    }
   };
 
   return (
@@ -45,7 +56,7 @@ const AddCourse = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             accept="application/pdf"
             type="file"
-            onChange={(e) => setFile(e.target.files[0])}
+            onChange={(e) => setFileUrl(e.target.files[0])}
             required
           />
           <button

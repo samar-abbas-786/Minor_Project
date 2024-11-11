@@ -15,7 +15,11 @@ const courseSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  
+  fileUrl: {
+    type: String,
+    required: true,
+  },
+ 
 });
 
 const Course = mongoose.model("Course", courseSchema);
