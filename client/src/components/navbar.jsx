@@ -9,11 +9,16 @@ import { RxCross1 } from "react-icons/rx";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
-  const { background, setBackground, authorized, setAuthorized, userDetail } =
-    useContext(Context);
+  const {
+    background,
+    setBackground,
+    authorized,
+    setAuthorized,
+    userDetail,
+    profilePicture,
+  } = useContext(Context);
 
   const [show, setShow] = useState(false);
-  
 
   return (
     <nav
@@ -115,7 +120,13 @@ const Navbar = () => {
 
             {authorized && (
               <Link to="/profile" className="text-4xl text-white">
-                <FaUserCircle />
+                <span>
+                  <img
+                    className="h-12 w-12 rounded-full"
+                    src={profilePicture}
+                    alt=""
+                  />
+                </span>
               </Link>
             )}
 

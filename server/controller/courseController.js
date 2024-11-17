@@ -1,14 +1,22 @@
-const { log } = require("console");
 const Course = require("../models/courseSchema");
 const User = require("../models/userSchema");
+const path = require("path");
 const { isValidObjectId } = require("mongoose");
 
 const AddCourses = async (req, res) => {
   try {
-    const { title, Code, addedBy, fileUrl } = req.body;
-    if (!isValidObjectId(addedBy)) {
-      res.status(400).json({ message: "Object Id is not valid" });
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
     }
+
+    const { title, Code, addedBy } = req.body;
+    const fileUrl = req.file.filename;
+    console.log(fileUrl);
+
+    if (!isValidObjectId(addedBy)) {
+      return res.status(400).json({ message: "Invalid Object ID" });
+    }
+
     const userExists = await User.findById(addedBy);
     if (!userExists) {
       return res.status(404).json({ message: "User not found" });
@@ -21,9 +29,11 @@ const AddCourses = async (req, res) => {
       fileUrl,
     });
 
-    res
-      .status(201)
-      .json({ message: "Course added successfully", data: course });
+    res.status(201).json({
+      message: "Course added successfully",
+      data: course,
+      fileUrl: fileUrl,
+    });
   } catch (error) {
     res
       .status(500)

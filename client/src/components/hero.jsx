@@ -4,7 +4,7 @@ import heroImage from "../../public/hero2.jpg"; // Adjust the import path if nee
 import { Context } from "@/context/authContext";
 
 const HeroSection = () => {
-  const { background, setBackground } = useContext(Context);
+  const { background, setBackground, authorized } = useContext(Context);
 
   return (
     <div
@@ -38,7 +38,9 @@ const HeroSection = () => {
           </Link>
           <Link
             to="/signup"
-            className="text-black font-semibold py-3 px-6 rounded-full bg-white hover:bg-gray-200 transition-all duration-500 ease-in-out transform hover:scale-110 shadow-lg"
+            className={`text-black ${
+              authorized ? "hidden" : "block"
+            } font-semibold py-3 px-6 rounded-full bg-white hover:bg-gray-200 transition-all duration-500 ease-in-out transform hover:scale-110 shadow-lg`}
           >
             Sign Up
           </Link>

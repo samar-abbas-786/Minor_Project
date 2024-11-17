@@ -2,32 +2,49 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "@/context/authContext";
+
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [Code, setCode] = useState("");
   const [fileUrl, setFileUrl] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { userDetail } = useContext(Context);
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      setFileUrl(selectedFile);
+    } else {
+      console.error("Only PDF files are allowed");
+      alert("Please upload a valid PDF file.");
+      setFileUrl(null);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userDetail);
+    setIsSubmitting(true);
 
-    console.log(userDetail._id);
+    if (!fileUrl) {
+      setErrorMessage("Please upload a PDF file.");
+      setIsSubmitting(false);
+      return;
+    }
 
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("Code", Code);
-    // formData.append("fileUrl", fileUrl);
-    // formData.append("addedBy", userDetail._id);
-
-    // formData.append("addedBy", userDetail._id);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("Code", Code);
+    formData.append("fileUrl", fileUrl);
+    formData.append("addedBy", userDetail._id);
 
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/course/addCourses",
-        { title, Code, fileUrl, addedBy: userDetail._id },
+        formData,
         {
+          headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         }
       );
@@ -35,6 +52,9 @@ const AddCourse = () => {
       navigate("/");
     } catch (error) {
       console.error("Error adding course:", error);
+      setErrorMessage("Failed to add course. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -44,6 +64,9 @@ const AddCourse = () => {
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
           Add New Course
         </h2>
+        {errorMessage && (
+          <div className="text-red-500 text-center mb-4">{errorMessage}</div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
@@ -66,14 +89,19 @@ const AddCourse = () => {
             accept="application/pdf"
             type="file"
             name="fileUrl"
-            onChange={(e) => setFileUrl(e.target.files[0])}
+            onChange={handleFileChange}
             required
           />
           <button
             type="submit"
-            className="w-full py-2 mt-4 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+            className={`w-full py-2 mt-4 text-white rounded-lg font-semibold transition duration-300 ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
+            disabled={isSubmitting}
           >
-            Submit Course
+            {isSubmitting ? "Submitting..." : "Submit Course"}
           </button>
         </form>
       </div>

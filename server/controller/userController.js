@@ -1,8 +1,9 @@
-const { User } = require("../models/userSchema.js");
+const User = require("../models/userSchema.js");
 
 const register = async (req, res) => {
   try {
     const { name, email, password, profession } = req.body;
+    // console.log(req.body);
 
     if (!name || !email || !password || !profession) {
       return res.status(400).json({
@@ -10,20 +11,24 @@ const register = async (req, res) => {
         description: "Please Provide all the fields",
       });
     }
+
     const isEmail = await User.findOne({ email });
     if (isEmail) {
       return res.status(400).json({
         message: "User Existed",
         description: "This email is already taken",
-        user,
       });
     }
+    // console.log("Unique", isEmail);
+
     const user = await User.create({
       name,
       email,
       password,
       profession,
     });
+    // console.log(user);
+
     return res.status(200).json({
       message: "Successfully Registered!!",
       description: `${user.name} registered succesfully`,
@@ -79,13 +84,22 @@ const logout = async (req, res) => {
     });
 };
 
-const getUserBYId = async (res, req) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    res.status(400).json({ message: "No user Existed" });
+const getUserById = async (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+
+  try {
+    const user = await User.findById(id);
+    console.log(user);
+
+    if (!user) {
+      return res.status(400).json({ message: "No user found" });
+    } else {
+      res.status(200).json({ message: `User Found with ${id}`, user });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
-  res.status(200).json({ message: "User found", user });
 };
 
 // const getUser = (req, res, next) => {
@@ -95,4 +109,4 @@ const getUserBYId = async (res, req) => {
 //     user,
 //   });
 // };
-module.exports = { login, logout, register,getUserBYId };
+module.exports = { login, logout, register, getUserById };
