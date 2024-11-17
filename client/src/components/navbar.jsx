@@ -202,7 +202,6 @@ const Navbar = () => {
             </>
           )}
 
-          {/* Common Links */}
           <Link
             to="/showCourseList"
             className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"

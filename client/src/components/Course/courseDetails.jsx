@@ -2,6 +2,7 @@ import { Context } from "@/context/authContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar";
 import {
   Dialog,
@@ -12,8 +13,10 @@ import {
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
+import { FaFileDownload } from "react-icons/fa";
 
 const CourseDetails = () => {
+  const navigate = useNavigate();
   const [course, setCourse] = useState([]);
   const [professor, setProfessor] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,8 +25,14 @@ const CourseDetails = () => {
   const [fileName, setFileName] = useState(null);
   const [courseContent, setCourseContent] = useState([]);
 
-  const { background, userDetail } = useContext(Context);
+  const { background, userDetail, setUserDetails } = useContext(Context);
   const { Code } = useParams();
+  const seeProfile = () => {
+    setUserDetails(professor);
+    navigate("/profile");
+  };
+
+  console.log(professor);
 
   const fetchData = async () => {
     try {
@@ -129,29 +138,50 @@ const CourseDetails = () => {
   return (
     <div
       className={`w-[100vw] ${
-        !background ? "bg-slate-900" : "bg-[#2CA4AB]"
+        !background ? "bg-slate-900" : "bg-[#fff]"
       } h-[100vh]`}
     >
+      <Navbar />
       <div
         className={`${
-          !background ? "bg-slate-900" : "bg-[#2CA4AB]"
-        } p-6 md:p-10 lg:p-14 h-full w-full text-white max-w-6xl mx-auto`}
+          !background ? "bg-slate-900 text-white" : "bg-[#fff] text-[#2CA4AB]"
+        } p-6 md:p-10 lg:p-14 h-full w-full  max-w-6xl mx-auto`}
       >
-        <h1 className="text-3xl sm:text-4xl text-white font-bold mb-6">
+        <h1
+          className={`text-3xl sm:text-4xl ${
+            !background ? "text-white" : "text-black"
+          } font-bold mb-6`}
+        >
           {course.title}
         </h1>
-        <p className="text-lg sm:text-xl mb-4">
-          <strong>Added By:</strong> {professor ? professor.name : ""}
+        <p className="text-lg sm:text-xl mb-4 flex items-center">
+          <strong className={`${!background ? "text-white" : "text-black"}`}>
+            Professor :
+          </strong>{" "}
+          <span className="flex items-center">
+            {professor ? professor.name : ""}{" "}
+            <img
+              onClick={seeProfile}
+              className="h-16 w-16 rounded-full"
+              src="https://img.freepik.com/premium-vector/business-man-face-portrait-icon_48369-5527.jpg?ga=GA1.1.732799867.1719772377&semt=ais_hybrid"
+              alt="profession.name"
+            />
+          </span>
         </p>
         <p className="text-lg sm:text-xl mb-6">
-          <strong>Course Code:</strong> {course.Code}
+          <strong className={`${!background ? "text-white" : "text-black"}`}>
+            Course Code:
+          </strong>{" "}
+          {course.Code}
         </p>
 
         {userDetail.profession === "professor" ? (
           <button
             onClick={handleDialogOpen}
             className={`text-sm ${
-              !background ? "bg-slate-700 text-white" : "bg-white text-black"
+              !background
+                ? "bg-slate-700 text-white"
+                : "bg-[#2CA4AB] text-white"
             } px-6 py-1 rounded-sm`}
           >
             Add Material
@@ -170,8 +200,8 @@ const CourseDetails = () => {
                   !background ? "bg-gray-800" : "bg-[#258c91]"
                 } p-4 rounded-lg shadow-md`}
               >
-                <h3 className="text-lg font-bold mb-2 text-white">
-                  {content.topic}
+                <h3 className="text-lg font-bold mb-2 text-white flex items-center">
+                  <FaFileDownload className="mr-2" /> {content.topic}
                 </h3>
                 <a
                   href={`http://localhost:5000/uploads/${content.fileName}`}
@@ -187,7 +217,6 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      {/* Dialog Box */}
       <Dialog open={dialogOpen} onClose={handleDialogClose}>
         <DialogTitle>Add Course Material</DialogTitle>
         <DialogContent>

@@ -21,12 +21,12 @@ const ProfilePage = () => {
   //   setBackground(!background);
   // }, 500);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUserDetails(storedUser);
-    }
-  }, [setUserDetails]);
+  // useEffect(() => {
+  //   const storedUser = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUser) {
+  //     setUserDetails(storedUser);
+  //   }
+  // }, [setUserDetails]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -54,7 +54,7 @@ const ProfilePage = () => {
       <div className="flex items-start justify-center p-6">
         <div
           className={`w-full max-w-6xl ${
-            background ? "bg-white" : "bg-slate-900 shadow-sm shadow-gray-100"
+            background ? "bg-white" : "bg-slate-900 shadow-md shadow-gray-100"
           } shadow-lg rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8`}
         >
           <div
