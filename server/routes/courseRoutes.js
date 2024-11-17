@@ -5,6 +5,8 @@ const {
   AddCourses,
   listAllCourses,
   singleCourse,
+  addContent,
+  getContent,
 } = require("../controller/courseController");
 
 const router = express.Router();
@@ -26,5 +28,7 @@ const upload = multer({ storage });
 router.post("/addCourses", upload.single("fileUrl"), AddCourses);
 router.get("/listAllCourses", listAllCourses);
 router.get("/singleCourse/:Code", singleCourse);
+router.post("/addContent/:Code", upload.single("fileName"), addContent);
+router.get("/getContent/:Code", getContent);
 
 module.exports = router;

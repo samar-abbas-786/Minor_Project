@@ -5,12 +5,21 @@ import { Context } from "@/context/authContext";
 import Navbar from "../navbar";
 
 const ProfilePage = () => {
-  const { userDetail, setUserDetails, setAuthorized, background } =
-    useContext(Context);
+  const {
+    userDetail,
+    setUserDetails,
+    setAuthorized,
+    background,
+    setBackground,
+  } = useContext(Context);
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { profilePicture } = useContext(Context);
+
+  // setInterval(() => {
+  //   setBackground(!background);
+  // }, 500);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -45,7 +54,7 @@ const ProfilePage = () => {
       <div className="flex items-start justify-center p-6">
         <div
           className={`w-full max-w-6xl ${
-            background ? "bg-white" : "bg-slate-900"
+            background ? "bg-white" : "bg-slate-900 shadow-sm shadow-gray-100"
           } shadow-lg rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8`}
         >
           <div

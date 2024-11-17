@@ -86,11 +86,11 @@ const logout = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const { id } = req.query;
-  console.log(id);
+  // console.log(id);
 
   try {
     const user = await User.findById(id);
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       return res.status(400).json({ message: "No user found" });

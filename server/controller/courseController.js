@@ -1,5 +1,6 @@
 const Course = require("../models/courseSchema");
 const User = require("../models/userSchema");
+const Content = require("../models/contentSchema");
 const path = require("path");
 const { isValidObjectId } = require("mongoose");
 
@@ -41,6 +42,41 @@ const AddCourses = async (req, res) => {
   }
 };
 
+const addContent = async (req, res) => {
+  try {
+    const { Code } = req.params;
+    const { topic, addedBy, userId } = req.body;
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const fileName = req.file.filename;
+
+    const courseExists = await Course.findOne({ Code });
+    if (!courseExists) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    const content = await Content.create({
+      topic,
+      fileName,
+      Code,
+      addedBy,
+      userId,
+    });
+
+    res.status(201).json({
+      message: "Content added successfully",
+      data: content,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error adding content", error: error.message });
+  }
+};
+
 const listAllCourses = async (req, res) => {
   let allCourses = await Course.find({});
   res
@@ -54,4 +90,22 @@ const singleCourse = async (req, res) => {
   res.status(200).json({ message: "Succesfully get  Course", course });
 };
 
-module.exports = { AddCourses, listAllCourses, singleCourse };
+const getContent = async (req, res) => {
+  const { Code } = req.params;
+  if (!Code) {
+    res.status(400).json({ message: "Course Does Not Exist" });
+  }
+  const content = await Content.find({ Code: Code });
+  if (!content) {
+    res.status(400).json({ message: "No Content Exist for this subject" });
+  }
+  res.status(200).json({ message: "Content got Successfully", content });
+};
+
+module.exports = {
+  AddCourses,
+  listAllCourses,
+  singleCourse,
+  addContent,
+  getContent,
+};

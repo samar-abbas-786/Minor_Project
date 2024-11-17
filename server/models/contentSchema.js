@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const courseSchema = new mongoose.Schema({
+const contentSchema = new mongoose.Schema({
   addedBy: {
     type: mongoose.Schema.ObjectId,
     ref: "Professor",
@@ -11,16 +11,18 @@ const courseSchema = new mongoose.Schema({
     ref: "Course",
     require: true,
   },
-  notice: {
+  topic: {
     type: String,
   },
-  fileData: {
-    type: Buffer,
+  fileName: {
+    type: [String],
+    required: true,
   },
-  filePath: {
+  Code: {
     type: String,
+    required: true,
   },
 });
 
-const Course = mongoose.model("Course", courseSchema);
-module.exports = Course;
+const Content = mongoose.model("Content", contentSchema);
+module.exports = Content;

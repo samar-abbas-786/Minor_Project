@@ -15,7 +15,7 @@ const courseSchema = new mongoose.Schema({
     unique: true,
   },
   fileUrl: {
-    type: String,
+    type: [String],
     required: true,
   },
 });
