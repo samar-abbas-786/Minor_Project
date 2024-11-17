@@ -12,7 +12,7 @@ import StudentTest from "./components/StudentTest";
 import AddCourse from "./components/Course/addCourse";
 import ShowCourseList from "./components/Course/showCoursesList";
 import CourseDetails from "./components/Course/courseDetails";
-
+import ProfilePage from "./components/Profile/profile";
 function App() {
   return (
     <>
@@ -21,6 +21,8 @@ function App() {
           <Route path="/" element={<Layout />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
           <Route path="/AddInstructions" element={<AddInstructions />} />
           <Route path="/ShowInstructions" element={<ShowInstructions />} />
           <Route path="/add-question" element={<AddQuestion />} />
@@ -28,7 +30,6 @@ function App() {
           <Route path="/AddCourse" element={<AddCourse />} />
           <Route path="/showCourseList" element={<ShowCourseList />} />
           <Route path="/course/:Code" element={<CourseDetails />} />
-
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

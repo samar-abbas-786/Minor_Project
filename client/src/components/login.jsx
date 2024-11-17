@@ -3,21 +3,23 @@ import { Button } from "./ui/button";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "@/context/authContext";
-import { MdEmail } from "react-icons/md"; // Import the email icon
-import { MdLock } from "react-icons/md"; // Import the lock icon for password
+import { MdEmail } from "react-icons/md";
+import { MdLock } from "react-icons/md";
 
 const Login = () => {
-  //login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { authorized, setAuthorized } = useContext(Context);
+  const { authorized, setAuthorized, setUserDetails,userDetail } = useContext(Context);
   const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
+  const [profile, setProfile] = useState(
+    "https://img.freepik.com/free-vector/young-prince-royal-attire_1308-176144.jpg?ga=GA1.1.732799867.1719772377&semt=ais_hybrid"
+  );
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/api/v1/user/login",
         { email, password },
         {
@@ -27,18 +29,24 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(data);
+      console.log(response);
 
+      console.log(response.data.user);
+      const user = localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
+      setUserDetails(user);
       setAuthorized(true);
       setEmail("");
       setPassword("");
-      setMessage(data.message);
-      setDescription(data.description);
+      setMessage(response.data.message);
+      setDescription(response.data.description);
     } catch (error) {
       console.error("error", error);
       setAuthorized(false);
-      setMessage(data.message);
-      setDescription(data.description);
+      setMessage(response.data.message);
+      setDescription(response.data.description);
     }
   };
 
@@ -48,15 +56,9 @@ const Login = () => {
 
   return (
     <div className="w-full max-h-screen flex">
-      {/* Left Section: Image */}
       <div className="w-1/2 md:block hidden flex items-center justify-center">
-        <img
-          src="/login.png" // Replace with your desired login image
-          alt="Login"
-          className="object-cover h-full"
-        />
+        <img src="/login.png" alt="Login" className="object-cover h-full" />
       </div>
-      {/* Right Section: Login Form */}
       <div className="md:w-1/2 w-full flex items-center justify-center">
         <div className="max-w-md w-full p-8 space-y-8 bg-white shadow-lg rounded-lg">
           <h2 className="text-3xl font-extrabold text-gray-900">Login</h2>

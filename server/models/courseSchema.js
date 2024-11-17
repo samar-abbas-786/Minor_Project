@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-
+// const { User } = require("./userSchema");
 const courseSchema = new mongoose.Schema({
   addedBy: {
     type: mongoose.Schema.ObjectId,
-    ref: "Professor",
-    required: true,
-    default: "66fbd49b3ada04456682c58e",
+    ref: "User",
+    // required: true,
   },
   title: {
     type: String,
@@ -19,7 +18,6 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
- 
 });
 
 const Course = mongoose.model("Course", courseSchema);

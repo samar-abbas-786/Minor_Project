@@ -1,13 +1,28 @@
+import { Context } from "@/context/authContext";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const CourseDetails = () => {
+  // const getProfessor = async () => {
+  //   const response = await axios.get("http://localhost:5000/api/v1/user", {
+  //     params: `${course.addedBy}`,
+  //   });
+  //   console.log(response);
+  // };
+  // console.log(getProfessor);
+  // useEffect(() => {
+  //   getProfessor;
+  // }, [course]);
+
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const { Code } = useParams();
+  // const { userDetail } = useContext(Context);
 
   const fetchData = async () => {
+    // console.log(JSON.stringify(userDetail));
+
     try {
       const response = await axios.get(
         `http://localhost:5000/api/v1/course/singleCourse/${Code}`
@@ -42,7 +57,7 @@ const CourseDetails = () => {
         {course.title}
       </h1>
       <p className="text-lg sm:text-xl mb-4">
-        <strong>Added By:</strong> {course.addedBy}
+        <strong>Added By:</strong> {course.name}
       </p>
       <p className="text-lg sm:text-xl mb-6">
         <strong>Course Code:</strong> {course.Code}

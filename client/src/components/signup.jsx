@@ -24,14 +24,14 @@ const SignUp = () => {
   const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
 
-  // const { authorized, setAuthorized } = useContext(Context);
+  const { authorized, setAuthorized, setUserDetails } = useContext(Context);
 
   // navigate("/login");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/api/v1/user/register",
         { name, email, password, profession },
         {
@@ -41,30 +41,22 @@ const SignUp = () => {
           withCredentials: true,
         }
       );
-      // console.log(message);
-      console.log(data);
-      // setAuthorized(true);
-      navigate("/login");
-      setMessage(data.message);
-      setDescription(data.description);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(response);
+      setAuthorized(true);
+      navigate("/");
+   
       setName("");
       setEmail("");
       setPassword("");
       setProfession("");
-      // <Navigate to="/login" />;
     } catch (error) {
       console.error("error", error);
       setAuthorized(false);
-      setMessage(data.message);
-      setDescription(data.description);
+   
     }
   };
-  // console.log(message);
-  // console.log(description);
-
-  // if (authorized) {
-  //   navigate("/login");
-  // }
+  
 
   return (
     <div className="w-full max-h-screen flex">

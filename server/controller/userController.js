@@ -15,6 +15,7 @@ const register = async (req, res) => {
       return res.status(400).json({
         message: "User Existed",
         description: "This email is already taken",
+        user,
       });
     }
     const user = await User.create({
@@ -26,6 +27,7 @@ const register = async (req, res) => {
     return res.status(200).json({
       message: "Successfully Registered!!",
       description: `${user.name} registered succesfully`,
+      user,
     });
   } catch (error) {
     return res.status(400).json({
@@ -43,6 +45,7 @@ const login = async (req, res) => {
       description: "Please Provide all the fileds",
     });
   }
+
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return res
@@ -51,21 +54,21 @@ const login = async (req, res) => {
   }
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return resṭ
+    return res
       .status(400)
       .json({ message: "Failed", description: "Password Did Not Match" });
   }
   res.status(200).json({
     message: "Success",
     description: `${user.name} successfully Login`,
+    user: user,
   });
-  //   sendToken(user, 201, res, "User Logged In!");
 };
 
 const logout = async (req, res) => {
   res
     .status(201)
-    .cookie("token", "", {
+    .clearCookie("token", "", {
       httpOnly: true,
       expires: new Date(Date.now() + 90 * 60000),
     })
@@ -76,6 +79,15 @@ const logout = async (req, res) => {
     });
 };
 
+const getUserBYId = async (res, req) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    res.status(400).json({ message: "No user Existed" });
+  }
+  res.status(200).json({ message: "User found", user });
+};
+
 // const getUser = (req, res, next) => {
 //   const user = req.user;
 //   res.status(200).json({
@@ -83,4 +95,4 @@ const logout = async (req, res) => {
 //     user,
 //   });
 // };
-module.exports = { login, logout, register };
+module.exports = { login, logout, register,getUserBYId };

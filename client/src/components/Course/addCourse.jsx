@@ -1,31 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Context } from "@/context/authContext";
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [Code, setCode] = useState("");
   const [fileUrl, setFileUrl] = useState(null);
   const navigate = useNavigate();
+  const { userDetail } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(userDetail);
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("Code", Code);
-    formData.append("fileUrl", fileUrl);
+    console.log(userDetail._id);
+
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("Code", Code);
+    // formData.append("fileUrl", fileUrl);
+    // formData.append("addedBy", userDetail._id);
+
+    // formData.append("addedBy", userDetail._id);
 
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/course/addCourses",
-        formData,
+        { title, Code, fileUrl, addedBy: userDetail._id },
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          withCredentials: true,
         }
       );
       console.log("Course added successfully:", response.data);
+      navigate("/");
     } catch (error) {
       console.error("Error adding course:", error);
     }
@@ -58,6 +65,7 @@ const AddCourse = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             accept="application/pdf"
             type="file"
+            name="fileUrl"
             onChange={(e) => setFileUrl(e.target.files[0])}
             required
           />
