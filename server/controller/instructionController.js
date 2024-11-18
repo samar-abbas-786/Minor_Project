@@ -1,8 +1,14 @@
+const Course = require("../models/courseSchema");
 const Instructions = require("../models/instructionSchema");
-const addInstructions = async (req, res) => {
-  console.log(req.body);
 
-  const { instruction, upLoadedBy } = req.body;
+const addInstructions = async (req, res) => {
+  // console.log(req.body);
+  const { instruction, upLoadedBy, courseId } = req.body;
+
+  const course = await Course.findById(courseId);
+  if (!course) {
+    res.status(400).json({ message: "course does not exist" });
+  }
 
   if (!instruction) {
     return res.status(400).json({
@@ -10,7 +16,11 @@ const addInstructions = async (req, res) => {
       message: "instructions must be an present",
     });
   }
-  const createdInstruction = new Instructions({ instruction, upLoadedBy });
+  const createdInstruction = new Instructions({
+    instruction,
+    upLoadedBy,
+    courseId,
+  });
   await createdInstruction.save();
 
   //   Object.assign({}, createdInstructions);
@@ -24,9 +34,11 @@ const addInstructions = async (req, res) => {
 
 const getInstruction = async (req, res) => {
   try {
-    const getAllInstruction = await Instructions.find({
-      uploadedBy: "66fbd49b3ada04456682c58e",
-    });
+    let { Code } = req.params;
+    const getAllInstruction = await Instructions.find({ Code: Code });
+    if (!getAllInstruction) {
+      res.status(400).json({ message: "No Instruction Found" });
+    }
     res.status(200).json({
       success: true,
       message: "Successfully got Instructions",

@@ -12,31 +12,31 @@ const AddCourse = () => {
   const navigate = useNavigate();
   const { userDetail } = useContext(Context);
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      setFileUrl(selectedFile);
-    } else {
-      console.error("Only PDF files are allowed");
-      alert("Please upload a valid PDF file.");
-      setFileUrl(null);
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   if (selectedFile && selectedFile.type === "application/pdf") {
+  //     setFileUrl(selectedFile);
+  //   } else {
+  //     console.error("Only PDF files are allowed");
+  //     alert("Please upload a valid PDF file.");
+  //     setFileUrl(null);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!fileUrl) {
-      setErrorMessage("Please upload a PDF file.");
-      setIsSubmitting(false);
-      return;
-    }
+    // if (!fileUrl) {
+    //   setErrorMessage("Please upload a PDF file.");
+    //   setIsSubmitting(false);
+    //   return;
+    // }
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("Code", Code);
-    formData.append("fileUrl", fileUrl);
+    // formData.append("fileUrl", fileUrl);
     formData.append("addedBy", userDetail._id);
 
     try {
@@ -84,20 +84,20 @@ const AddCourse = () => {
             onChange={(e) => setCode(e.target.value)}
             required
           />
-          <input
+          {/* <input
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             accept="application/pdf"
             type="file"
             name="fileUrl"
             onChange={handleFileChange}
             required
-          />
+          /> */}
           <button
             type="submit"
             className={`w-full py-2 mt-4 text-white rounded-lg font-semibold transition duration-300 ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
+                : "bg-slate-900 hover:bg-slate-800"
             }`}
             disabled={isSubmitting}
           >

@@ -2,8 +2,9 @@ const {
   addQuestion,
   getAllQuestions,
   submitTest,
-} = require("../controller/questionController");
+} = require("../controller/questionController.js");
 const express = require("express");
+console.log({ addQuestion, getAllQuestions, submitTest });
 
 const router = express.Router();
 

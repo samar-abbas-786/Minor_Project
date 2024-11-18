@@ -6,13 +6,13 @@ const { isValidObjectId } = require("mongoose");
 
 const AddCourses = async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ message: "No file uploaded" });
-    }
+    // if (!req.file) {
+    //   return res.status(400).json({ message: "No file uploaded" });
+    // }
 
     const { title, Code, addedBy } = req.body;
-    const fileUrl = req.file.filename;
-    console.log(fileUrl);
+    // const fileUrl = req.file.filename;
+    // console.log(fileUrl);
 
     if (!isValidObjectId(addedBy)) {
       return res.status(400).json({ message: "Invalid Object ID" });
@@ -27,13 +27,13 @@ const AddCourses = async (req, res) => {
       title,
       Code,
       addedBy,
-      fileUrl,
+      // fileUrl,
     });
 
     res.status(201).json({
       message: "Course added successfully",
       data: course,
-      fileUrl: fileUrl,
+      // fileUrl: fileUrl,
     });
   } catch (error) {
     res

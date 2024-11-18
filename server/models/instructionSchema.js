@@ -7,8 +7,17 @@ const instructionSchema = new mongoose.Schema({
   },
   uploadedBy: {
     type: mongoose.Schema.ObjectId,
-    ref: "Professor",
-    default: "66fbd49b3ada04456682c58e",
+    ref: "User",
+    // default: "66fbd49b3ada04456682c58e",
+  },
+  courseId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Course",
+  },
+  Code: {
+    type: String,
+    ref: "Course",
+    required: true,
   },
 });
 

@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 // console.log("fileUrl", fileUrl);
 
-router.post("/addCourses", upload.single("fileUrl"), AddCourses);
+router.post("/addCourses", AddCourses);
 router.get("/listAllCourses", listAllCourses);
 router.get("/singleCourse/:Code", singleCourse);
 router.post("/addContent/:Code", upload.single("fileName"), addContent);

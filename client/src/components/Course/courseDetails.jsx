@@ -21,6 +21,7 @@ const CourseDetails = () => {
   const [professor, setProfessor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [createTestDialogOpen, setCreateTestDialogOpen] = useState(false);
   const [topic, setTopic] = useState("");
   const [fileName, setFileName] = useState(null);
   const [courseContent, setCourseContent] = useState([]);
@@ -31,8 +32,6 @@ const CourseDetails = () => {
     setUserDetails(professor);
     navigate("/profile");
   };
-
-  console.log(professor);
 
   const fetchData = async () => {
     try {
@@ -63,7 +62,7 @@ const CourseDetails = () => {
     getContent();
   }, [Code]);
 
-  const getProfessor = async (addedBy) => {
+  const getProfessor = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/v1/user/getUserById?id=${course.addedBy}`
@@ -76,25 +75,18 @@ const CourseDetails = () => {
 
   useEffect(() => {
     if (course && course.addedBy) {
-      getProfessor(course.addedBy);
+      getProfessor();
     }
   }, [course]);
 
-  const handleDialogOpen = () => {
-    setDialogOpen(true);
-  };
+  const handleDialogOpen = () => setDialogOpen(true);
+  const handleDialogClose = () => setDialogOpen(false);
 
-  const handleDialogClose = () => {
-    setDialogOpen(false);
-  };
+  const handleCreateTestDialogOpen = () => setCreateTestDialogOpen(true);
+  const handleCreateTestDialogClose = () => setCreateTestDialogOpen(false);
 
-  const handleTopicChange = (event) => {
-    setTopic(event.target.value);
-  };
-
-  const handleFileChange = (event) => {
-    setFileName(event.target.files[0]);
-  };
+  const handleTopicChange = (event) => setTopic(event.target.value);
+  const handleFileChange = (event) => setFileName(event.target.files[0]);
 
   const handleSubmit = async () => {
     if (!topic || !fileName) {
@@ -137,7 +129,7 @@ const CourseDetails = () => {
 
   return (
     <div
-      className={`w-[100vw] ${
+      className={`w-[100vw] h-[100%] ${
         !background ? "bg-slate-900" : "bg-[#fff]"
       } h-[100vh]`}
     >
@@ -154,54 +146,84 @@ const CourseDetails = () => {
         >
           {course.title}
         </h1>
-        <p className="text-lg sm:text-xl mb-4 flex items-center">
-          <strong className={`${!background ? "text-white" : "text-black"}`}>
-            Professor :
-          </strong>{" "}
-          <span className="flex items-center">
-            {professor ? professor.name : ""}{" "}
-            <img
-              onClick={seeProfile}
-              className="h-16 w-16 rounded-full"
-              src="https://img.freepik.com/premium-vector/business-man-face-portrait-icon_48369-5527.jpg?ga=GA1.1.732799867.1719772377&semt=ais_hybrid"
-              alt="profession.name"
-            />
-          </span>
-        </p>
-        <p className="text-lg sm:text-xl mb-6">
-          <strong className={`${!background ? "text-white" : "text-black"}`}>
-            Course Code:
-          </strong>{" "}
-          {course.Code}
-        </p>
-
+        <div
+          className={` w-max p-5 my-8 ${
+            !background
+              ? "bg-slate-900 shadow-sm shadow-white"
+              : "bg-[#fff] text-black shadow-sm shadow-black"
+          } rounded-md `}
+        >
+          <p className="text-lg sm:text-xl mb-4 flex items-center">
+            <strong className={`${!background ? "text-white" : "text-black"}`}>
+              Professor :
+            </strong>{" "}
+            <span className="flex items-center gap-6">
+              {professor ? professor.name : ""}{" "}
+              <img
+                onClick={seeProfile}
+                className="h-12 w-12 rounded-full"
+                src="https://img.freepik.com/free-vector/young-man-with-glasses-avatar_1308-173760.jpg?ga=GA1.1.732799867.1719772377&semt=ais_hybrid"
+                alt="profession.name"
+              />
+            </span>
+          </p>
+          <p className="text-lg sm:text-xl mb-6">
+            <strong className={`${!background ? "text-white" : "text-black"}`}>
+              Course Code:
+            </strong>{" "}
+            {course.Code}
+          </p>
+        </div>
         {userDetail.profession === "professor" ? (
-          <button
-            onClick={handleDialogOpen}
-            className={`text-sm ${
-              !background
-                ? "bg-slate-700 text-white"
-                : "bg-[#2CA4AB] text-white"
-            } px-6 py-1 rounded-sm`}
-          >
-            Add Material
-          </button>
+          <div className="flex items-center gap-10">
+            <button
+              onClick={handleDialogOpen}
+              className={`text-sm ${
+                !background
+                  ? "bg-slate-950 text-white shadow-sm shadow-white"
+                  : "bg-[#2CA4AB] text-white"
+              } px-6 py-1 rounded-sm`}
+            >
+              Add Material
+            </button>
+            <button
+              onClick={handleCreateTestDialogOpen}
+              className={`text-sm ${
+                !background ? "bg-red-500 text-white shadow-sm shadow-white" : "bg-red-700 text-white"
+              } px-6 py-1 rounded-sm`}
+            >
+              Create Test
+            </button>
+          </div>
         ) : (
           ""
         )}
 
         <div className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Course Topics</h2>
+          <h2
+            className={`text-2xl ${
+              !background ? "" : "text-slate-950"
+            } font-semibold mb-4`}
+          >
+            Course Topics
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {courseContent.map((content, index) => (
               <div
                 key={index}
                 className={`${
-                  !background ? "bg-gray-800" : "bg-[#258c91]"
+                  !background ? "bg-gray-800" : "bg-gray-100"
                 } p-4 rounded-lg shadow-md`}
               >
-                <h3 className="text-lg font-bold mb-2 text-white flex items-center">
-                  <FaFileDownload className="mr-2" /> {content.topic}
+                <h3
+                  className={`text-lg font-bold mb-2 ${
+                    !background ? "text-white" : "text-slate-900"
+                  }  flex items-center`}
+                >
+                  <FaFileDownload
+                    className={`mr-2 ${!background ? "" : "text-black"}`}
+                  />{" "}
+                  {content.topic}
                 </h3>
                 <a
                   href={`http://localhost:5000/uploads/${content.fileName}`}
@@ -242,6 +264,35 @@ const CourseDetails = () => {
           </Button>
           <Button onClick={handleSubmit} color="primary">
             Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={createTestDialogOpen} onClose={handleCreateTestDialogClose}>
+        <DialogTitle>Create Test</DialogTitle>
+        <DialogContent>
+          <div className="space-y-4">
+            <Button
+              variant="outlined"
+              onClick={() => navigate(`/add-instructions/${Code}`)}
+              color="primary"
+              fullWidth
+            >
+              Add Instructions
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate(`/add-questions/${Code}`)}
+              color="secondary"
+              fullWidth
+            >
+              Add Questions
+            </Button>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCreateTestDialogClose} color="secondary">
+            Close
           </Button>
         </DialogActions>
       </Dialog>

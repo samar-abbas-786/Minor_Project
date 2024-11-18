@@ -16,7 +16,6 @@ const courseSchema = new mongoose.Schema({
   },
   fileUrl: {
     type: [String],
-    required: true,
   },
 });
 

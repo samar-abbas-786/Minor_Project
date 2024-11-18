@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
   question: {
-    type: String,
+    type: [String],
     required: [true, "Please Provide the Question"],
   },
   option: {
@@ -20,8 +20,11 @@ const questionSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.ObjectId,
-    ref: "Professor",
-    default: "66fbd49b3ada04456682c58e",
+    ref: "User",
+  },
+  Code: {
+    type: String,
+    ref: "Course",
   },
 });
 

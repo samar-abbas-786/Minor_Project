@@ -15,7 +15,7 @@ const HeroSection = () => {
       {/* Left Side - Content */}
       <div
         className={`flex flex-col justify-center p-10 ${
-          background ? "text-[#000]" : "text-[#fff]"
+          background ? "text-slate-900" : "text-[#fff]"
         } w-full lg:w-1/2 text-center lg:text-left`}
       >
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">

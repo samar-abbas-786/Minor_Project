@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Context } from "@/context/authContext";
 import Navbar from "../navbar";
+import { BsArrowRightShort } from "react-icons/bs";
 
 const ShowCourseList = () => {
   const [data, setData] = useState([]);
@@ -46,28 +47,41 @@ const ShowCourseList = () => {
               className={`${
                 !background
                   ? "bg-slate-800 hover:bg-slate-700"
-                  : "bg-[#2cc9be] hover:bg-[#2cb6ad]"
+                  : "bg-gray-50 hover:bg-gray-200"
               } p-5 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 `}
             >
-              <h2 className="text-2xl font-semibold text-white mb-2 truncate">
+              <h2
+                className={`text-2xl font-semibold ${
+                  !background ? "text-white" : "text-black"
+                }  mb-2 truncate`}
+              >
                 {item.title}
               </h2>
               <p
                 className={`text-sm ${
-                  !background ? "text-slate-400" : "text-white"
+                  !background ? "text-white" : "text-slate-900"
                 } mb-4`}
               >
                 Code: {item.Code}
               </p>
               <Link
-                className={`${
-                  !background
-                    ? "text-blue-300 hover:text-blue-500"
-                    : "text-[#157666] hover:text-black"
-                }  text-lg underline`}
                 to={`/course/${item.Code}`}
+                className="flex items-center justify-between"
               >
-                View Course Details
+                <Link
+                  className={`${
+                    !background
+                      ? "text-blue-300 hover:text-blue-500"
+                      : "text-[#157666] hover:text-black"
+                  }  text-md `}
+                  to={`/course/${item.Code}`}
+                >
+                  View Course Details
+                </Link>
+                <BsArrowRightShort
+                  className={`${!background ? "text-white" : "text-black"}`}
+                  size={30}
+                />
               </Link>
             </div>
           ))}

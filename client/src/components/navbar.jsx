@@ -23,22 +23,26 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        background ? "bg-[#2CA4AB]" : "bg-slate-900"
-      } shadow-2xl w-full`}
+        background
+          ? "bg-gradient-to-r from-cyan-500 to-teal-500"
+          : "bg-slate-900"
+      } shadow-lg w-full`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          <div className="flex-shrink-0 flex items-center space-x-3">
-            <IoSchool className="h-12 w-12 text-white hover:scale-105 transform transition duration-200 ease-in-out" />
-            <span className="text-white font-bold text-2xl md:text-3xl tracking-wide font-serif">
+        <div className="flex justify-between items-center py-4 h-16">
+          {/* Logo and Title */}
+          <div className="flex items-center space-x-3">
+            <IoSchool className="h-10 w-10 text-white transform transition-all duration-200 ease-in-out" />
+            <span className="text-white font-extrabold text-2xl md:text-3xl tracking-wide font-serif">
               Edu<span className="text-yellow-300">PI</span>
             </span>
           </div>
 
-          <div className="hidden md:flex space-x-10 items-center">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6 items-center">
             <Link
               to="/"
-              className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Home
             </Link>
@@ -47,13 +51,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/ShowInstructions"
-                  className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Show Instruction
                 </Link>
                 <Link
                   to="/take-test"
-                  className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Attempt Test
                 </Link>
@@ -64,19 +68,19 @@ const Navbar = () => {
               <>
                 <Link
                   to="/AddInstructions"
-                  className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Add Instruction
                 </Link>
                 <Link
                   to="/add-question"
-                  className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Add Questions
                 </Link>
                 <Link
                   to="/AddCourse"
-                  className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                 >
                   Add Courses
                 </Link>
@@ -85,18 +89,19 @@ const Navbar = () => {
 
             <Link
               to="/showCourseList"
-              className="text-white font-semibold text-[14px] hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+              className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
             >
               Course List
             </Link>
           </div>
 
+          {/* User Profile and Theme Toggle */}
           <div className="flex space-x-4 items-center">
-            {!authorized && (
+            {!authorized ? (
               <div className="flex space-x-4 items-center">
                 <Link
                   to="/login"
-                  className={`text-white font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
+                  className={`text-white font-medium py-1 px-4 md:py-2 md:px-6 rounded-full ${
                     background
                       ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
                       : "bg-slate-900 shadow-sm shadow-white"
@@ -107,7 +112,7 @@ const Navbar = () => {
 
                 <Link
                   to="/signup"
-                  className={`text-[#2CA4AB] font-semibold py-1 px-4 md:py-2 md:px-6 rounded-full ${
+                  className={`text-[#2CA4AB] font-medium py-1 px-4 md:py-2 md:px-6 rounded-full ${
                     background
                       ? "bg-gradient-to-r from-white to-gray-100"
                       : "bg-slate-800 shadow-sm shadow-white text-slate-50"
@@ -116,27 +121,25 @@ const Navbar = () => {
                   Register
                 </Link>
               </div>
-            )}
-
-            {authorized && (
-              <Link to="/profile" className="text-4xl text-white">
-                <span>
-                  <img
-                    className="h-12 w-12 rounded-full"
-                    src={profilePicture}
-                    alt=""
-                  />
-                </span>
+            ) : (
+              <Link to="/profile" className="text-3xl text-white">
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={profilePicture}
+                  alt="Profile"
+                />
               </Link>
             )}
 
+            {/* Theme Toggle */}
             <button
               onClick={() => setBackground(!background)}
-              className={`text-xl ${background ? "text-white" : "text-white"}`}
+              className={`text-xl text-white`}
             >
               {background ? <FaMoon /> : <IoSunny />}
             </button>
 
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setShow(!show)}
               className="md:hidden text-3xl text-white"
@@ -147,6 +150,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <div className={`${show ? "block" : "hidden"} md:hidden`}>
         <div
           className={`px-2 pt-2 pb-3 space-y-1 ${
