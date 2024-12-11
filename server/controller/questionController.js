@@ -1,24 +1,25 @@
 const Question = require("../models/questionSchema");
 
-exports.addQuestion = async (req, res) => {
-  const { question, option, correctOption, marks } = req.body;
+exports.addQuestions = async (req, res) => {
+  const { questions } = req.body;
+  const { code } = req.query;
 
-  if (!question || !option || !correctOption || !marks) {
+  if (!questions) {
     return res.status(400).json({ success: false, message: "Missing fields" });
   }
 
   try {
-    const newQuestion = await Question.create({
-      question,
-      option,
-      correctOption,
-      marks,
-    });
+    const newQuestions = await Question.insertMany(
+      questions.map((q) => ({
+        ...q,
+        code,
+      }))
+    );
 
     res.status(201).json({
       success: true,
-      message: "Question added successfully",
-      data: newQuestion,
+      message: "Questions added successfully",
+      data: newQuestions,
     });
   } catch (error) {
     res.status(500).json({

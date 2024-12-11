@@ -282,6 +282,19 @@ const CourseDetails = () => {
         ) : (
           ""
         )}
+        {userDetail.profession === "student" ? (
+          <button
+            className={`text-sm ${
+              !background
+                ? "bg-cyan-700 text-white shadow-sm shadow-white"
+                : "bg-cyan-900 text-white"
+            } px-6 py-1 rounded-sm`}
+          >
+            Attempt Test
+          </button>
+        ) : (
+          ""
+        )}
 
         <div className="mt-10">
           <h2

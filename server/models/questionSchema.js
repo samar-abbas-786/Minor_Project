@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
   question: {
-    type: [String],
+    type: String,
     required: [true, "Please Provide the Question"],
   },
-  option: {
+  options: {
     type: [String],
     required: [true, "Please Provide the options"],
   },
@@ -22,10 +22,14 @@ const questionSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "User",
   },
-  Code: {
+  code: {
     type: String,
     ref: "Course",
   },
+  // timer: {
+  //   type: Number,
+  //   required: true,
+  // },
 });
 
 const Question = mongoose.model("Question", questionSchema);

@@ -1,28 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom"; // Import useParams
 import Navbar from "../navbar";
 import axios from "axios";
 import { Context } from "@/context/authContext";
 
 const AddInstructions = () => {
+  const { code } = useSearchParams();
+
   const [count, setCount] = useState(1);
   const [inst, setInst] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [subjectCode, setSubjectCode] = useState(code);
   const { background } = useContext(Context);
+  console.log(subjectCode);
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
+
     const { data } = await axios.post(
       "http://localhost:5000/api/v1/instruction/addInstruction",
-      { instruction: inst },
+      { instruction: inst, code: subjectCode },
       {
         withCredentials: true,
       }
     );
-    console.log(data);
 
+    console.log(data);
     setCount(1);
     setInputValue("");
     setInst([]);
+    setSubjectCode("");
   };
 
   const handleAdd = () => {
@@ -34,7 +41,7 @@ const AddInstructions = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen flex justify-center items-center  bg-gray-100 py-10">
+      <div className="min-h-screen flex justify-center items-center bg-gray-100 py-10">
         <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-4xl flex mb-16 space-x-12">
           <div className="w-1/2 flex flex-col space-y-6">
             <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
@@ -60,11 +67,11 @@ const AddInstructions = () => {
                 <button
                   onClick={handleAdd}
                   type="button"
-                  className={` px-6 py-3 ${
+                  className={`px-6 py-3 ${
                     !background
                       ? "bg-slate-900 hover:bg-slate-800"
                       : "bg-[#2CA4AB] hover:bg-[#1D8D92]"
-                  } text-white font-semibold rounded-lg  focus:outline-none focus:ring-2 focus:ring-green-500 transition`}
+                  } text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition`}
                 >
                   Add
                 </button>
@@ -72,11 +79,11 @@ const AddInstructions = () => {
 
               <button
                 onClick={onHandleSubmit}
-                className={`w-full py-3  ${
+                className={`w-full py-3 ${
                   !background
                     ? "bg-slate-900 hover:bg-slate-800"
                     : "bg-[#2CA4AB] hover:bg-[#1D8D92]"
-                } text-white font-semibold rounded-lg  focus:outline-none focus:ring-2 focus:ring-green-500 transition mt-6`}
+                } text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition mt-6`}
                 type="submit"
               >
                 Submit

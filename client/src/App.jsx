@@ -21,6 +21,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        {/* add-questions/COC2080 */}
         <Routes>
           <Route path="/" element={<Layout />} />
           <Route path="/signup" element={<SignUp />} />
@@ -28,10 +29,9 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/CreateProfilePage" element={<CreateProfilePage />} />
           <Route path="/EnrolledStudents" element={<EnrolledStudentsPage />} />
-
-          <Route path="/AddInstructions" element={<AddInstructions />} />
+          <Route path="/add-instructions/:code" element={<AddInstructions />} />
           <Route path="/ShowInstructions" element={<ShowInstructions />} />
-          <Route path="/add-question" element={<AddQuestion />} />
+          <Route path="/add-questions/:code" element={<AddQuestion />} />
           <Route path="/take-test" element={<StudentTest />} />
           <Route path="/AddCourse" element={<AddCourse />} />
           <Route path="/MyEnrollCourses" element={<MyEnrollCourses />} />

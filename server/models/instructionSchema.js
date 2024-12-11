@@ -14,7 +14,7 @@ const instructionSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Course",
   },
-  Code: {
+  code: {
     type: String,
     ref: "Course",
     required: true,

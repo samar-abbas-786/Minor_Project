@@ -4,6 +4,7 @@ const Instructions = require("../models/instructionSchema");
 const addInstructions = async (req, res) => {
   // console.log(req.body);
   const { instruction, upLoadedBy, courseId } = req.body;
+  const {code} = req.query;
 
   const course = await Course.findById(courseId);
   if (!course) {
@@ -20,6 +21,7 @@ const addInstructions = async (req, res) => {
     instruction,
     upLoadedBy,
     courseId,
+    code
   });
   await createdInstruction.save();
 
@@ -34,8 +36,8 @@ const addInstructions = async (req, res) => {
 
 const getInstruction = async (req, res) => {
   try {
-    let { Code } = req.params;
-    const getAllInstruction = await Instructions.find({ Code: Code });
+    let { code } = req.query;
+    const getAllInstruction = await Instructions.find({ code: code });
     if (!getAllInstruction) {
       res.status(400).json({ message: "No Instruction Found" });
     }

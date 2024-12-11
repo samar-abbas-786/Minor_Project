@@ -60,7 +60,7 @@ const Navbar = () => {
 
               {userDetail?.profession !== "student" && (
                 <>
-                  <Link
+                  {/* <Link
                     to="/AddInstructions"
                     className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                   >
@@ -71,7 +71,7 @@ const Navbar = () => {
                     className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
                   >
                     Add Questions
-                  </Link>
+                  </Link> */}
                   <Link
                     to="/AddCourse"
                     className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
