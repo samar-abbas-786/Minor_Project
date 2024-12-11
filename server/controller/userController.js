@@ -1,5 +1,5 @@
 const User = require("../models/userSchema.js");
-
+const enrollCourse = require("../models/enrollSchema.js");
 const register = async (req, res) => {
   try {
     const { name, email, password, profession } = req.body;
@@ -101,6 +101,33 @@ const getUserById = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+const getAllEnrolledStudent = async (req, res) => {
+  try {
+    const { userId } = req.query;
+
+    const getEnrollDetails = await enrollCourse.find({ addedBy: userId });
+
+    if (!getEnrollDetails || getEnrollDetails.length === 0) {
+      return res.status(404).json({ message: "No enrollment records found." });
+    }
+
+    const userIds = getEnrollDetails.map((enrollDetail) => enrollDetail.userId);
+
+    const students = await User.find({ _id: { $in: userIds } });
+
+    if (!students || students.length === 0) {
+      return res.status(404).json({ message: "No students found." });
+    }
+
+    res.status(200).json({
+      message: "Students retrieved successfully",
+      students,
+    });
+  } catch (error) {
+    console.error("Error fetching enrolled students:", error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
 
 // const getUser = (req, res, next) => {
 //   const user = req.user;
@@ -109,4 +136,10 @@ const getUserById = async (req, res) => {
 //     user,
 //   });
 // };
-module.exports = { login, logout, register, getUserById };
+module.exports = {
+  login,
+  logout,
+  register,
+  getUserById,
+  getAllEnrolledStudent,
+};

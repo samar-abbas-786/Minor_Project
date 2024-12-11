@@ -7,6 +7,9 @@ const {
   singleCourse,
   addContent,
   getContent,
+  myEnrolledCourse,
+  getEnrolledCourses,
+  getEnrollByCourseId,
 } = require("../controller/courseController");
 
 const router = express.Router();
@@ -25,10 +28,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 // console.log("fileUrl", fileUrl);
 
-router.post("/addCourses", AddCourses);
+router.post("/addCourses", upload.none(), AddCourses);
 router.get("/listAllCourses", listAllCourses);
 router.get("/singleCourse/:Code", singleCourse);
 router.post("/addContent/:Code", upload.single("fileName"), addContent);
 router.get("/getContent/:Code", getContent);
+router.post("/enrolled", upload.none(), myEnrolledCourse);
+router.get("/getEnrolledCourses", getEnrolledCourses);
+router.get("/getEnrollByCourseId", getEnrollByCourseId);
 
+getEnrollByCourseId;
 module.exports = router;

@@ -1,48 +1,55 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Context } from "@/context/authContext";
+import axios from "axios";
 import Navbar from "../navbar";
 
 const ProfilePage = () => {
-  const {
-    userDetail,
-    setUserDetails,
-    setAuthorized,
-    background,
-    setBackground,
-  } = useContext(Context);
+  const { userDetail, background, isProfile, setIsProfile, profilePicture } =
+    useContext(Context);
   const navigate = useNavigate();
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { profilePicture } = useContext(Context);
+  const [enrollCourses, setEnrollCourses] = useState([]);
+  const [profile, setProfile] = useState();
+  const [enrollStudent, setEnrollStudent] = useState([]);
 
-  // setInterval(() => {
-  //   setBackground(!background);
-  // }, 500);
+  const getAllCourses = async () => {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/course/getEnrolledCourses",
+      { params: { userId: userDetail._id } }
+    );
+    if (!response) {
+      return console.log("No Enrolled Course");
+    }
+    setEnrollCourses(response.data.getAllCourses || []);
+  };
 
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem("user"));
-  //   if (storedUser) {
-  //     setUserDetails(storedUser);
-  //   }
-  // }, [setUserDetails]);
+  useEffect(() => {
+    getAllCourses();
+  }, [userDetail]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    setAuthorized(false);
     navigate("/login");
   };
 
-  const handlePasswordChange = () => {
-    if (newPassword !== confirmPassword) {
-      alert("Passwords do not match!");
-    } else {
-      alert("Password updated successfully");
-      setNewPassword("");
-      setConfirmPassword("");
-    }
+  const getProfile = async () => {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/profile/getProfileByUserId",
+      {
+        params: {
+          userId: userDetail._id,
+        },
+      }
+    );
+    setProfile(response?.data.profile);
+    setIsProfile(true);
   };
+
+  useEffect(() => {
+    if (userDetail) {
+      getProfile();
+    }
+  }, [userDetail]);
 
   return (
     <div
@@ -80,48 +87,55 @@ const ProfilePage = () => {
               <div className="flex items-center">
                 <span className="font-medium w-40">Profession:</span>
                 <span className="capitalize">
-                  {userDetail?.profession || "Not specified"}
+                  {profile?.profession || "Not specified"}
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="font-medium w-40">Other Details:</span>
-                <span>Additional details here...</span>
+                <span className="font-medium w-40">College Name:</span>
+                <span>{profile?.collegeName || "Not specified"}</span>
               </div>
+              <div className="flex items-center">
+                <span className="font-medium w-40">Year of Studying:</span>
+                <span>{profile?.yearOfStudying || "Not specified"}</span>
+              </div>
+              <div className="flex items-center">
+                <span className="font-medium w-40">Branch:</span>
+                <span>{profile?.branch || "Not specified"}</span>
+              </div>
+
+              {userDetail.profession === "professor" && (
+                <div className="flex items-center">
+                  <span className="font-medium w-40">Enrolled Students:</span>
+                  <Link
+                    className={`
+                    ${
+                      background
+                        ? "bg-yellow-600 text-white"
+                        : "bg-slate-800 text-white"
+                    } px-5 text-md py-1 rounded-sm font-semibold
+                  `}
+                    to={"/EnrolledStudents"}
+                  >
+                    View
+                  </Link>
+                </div>
+              )}
             </div>
 
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold">Change Password</h3>
-              <div className="mt-4 space-y-4">
-                <input
-                  type="password"
-                  className={`w-full p-2 border rounded-lg ${
-                    background ? "border-gray-300" : "border-slate-700"
-                  }`}
-                  placeholder="New Password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-                <input
-                  type="password"
-                  className={`w-full p-2 border rounded-lg ${
-                    background ? "border-gray-300" : "border-slate-700"
-                  }`}
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <button
-                  onClick={handlePasswordChange}
-                  className={`w-full py-2 rounded-lg ${
+            {userDetail.profession === "student" && (
+              <div className="mt-8">
+                <a
+                  className={`px-5 py-2 rounded-md font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-md border-2 ${
                     background
-                      ? "bg-[#2CA4AB] hover:bg-[#249499]"
-                      : "bg-slate-800 hover:bg-slate-600"
-                  } text-white`}
+                      ? "bg-orange-500 text-teal-50 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-400"
+                      : "bg-slate-900 text-teal-100 hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-500"
+                  }`}
+                  href="/MyEnrollCourses"
                 >
-                  Update Password
-                </button>
+                  My Enrolled Courses
+                </a>
               </div>
-            </div>
+            )}
 
             <div className="mt-6">
               <button

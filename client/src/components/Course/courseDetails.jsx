@@ -1,6 +1,7 @@
 import { Context } from "@/context/authContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { CgMathPlus } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar";
@@ -25,13 +26,75 @@ const CourseDetails = () => {
   const [topic, setTopic] = useState("");
   const [fileName, setFileName] = useState(null);
   const [courseContent, setCourseContent] = useState([]);
+  const [enroll, setEnroll] = useState(false);
 
-  const { background, userDetail, setUserDetails } = useContext(Context);
+  const { background, userDetail, prof, setProf } = useContext(Context);
   const { Code } = useParams();
   const seeProfile = () => {
-    setUserDetails(professor);
-    navigate("/profile");
+    // setUserDetails(professor);
+    navigate("/teacherProfile");
   };
+  // console.log("Professor", professor._id);
+  // console.log("Course", course.addedBy);
+  // console.log("userDetail", userDetail._id);
+  const handleEnrollment = async () => {
+    const formData = new FormData();
+    formData.append("userId", userDetail._id);
+    formData.append("courseId", course._id);
+    formData.append("addedBy", course.addedBy);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/course/enrolled",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        }
+      );
+      // console.log("Clicked");
+
+      if (response.status === 200) {
+        setEnroll(true);
+        console.log("Enrollment response:", response);
+      } else {
+        console.log("Enrollment failed:", response);
+      }
+    } catch (error) {
+      console.error("Error during enrollment:", error);
+    }
+  };
+
+  const getEnrollByCourseId = async () => {
+    if (!course?._id || !userDetail?._id) return;
+
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/course/getEnrollByCourseId",
+        {
+          params: {
+            courseId: course._id,
+            userId: userDetail._id,
+          },
+        }
+      );
+
+      if (response.data.isEnrolled) {
+        setEnroll(true);
+      } else {
+        setEnroll(false);
+      }
+    } catch (error) {
+      console.error("Error checking enrollment:", error);
+      setEnroll(false);
+    }
+  };
+
+  useEffect(() => {
+    if (course && userDetail) {
+      getEnrollByCourseId();
+    }
+  }, [course, userDetail]);
 
   const fetchData = async () => {
     try {
@@ -68,6 +131,8 @@ const CourseDetails = () => {
         `http://localhost:5000/api/v1/user/getUserById?id=${course.addedBy}`
       );
       setProfessor(response.data.user);
+      setProf(response.data.user);
+      console.log(professor);
     } catch (error) {
       console.error("Error fetching professor details:", error);
     }
@@ -76,6 +141,7 @@ const CourseDetails = () => {
   useEffect(() => {
     if (course && course.addedBy) {
       getProfessor();
+      // console.log(professor);
     }
   }, [course]);
 
@@ -173,8 +239,24 @@ const CourseDetails = () => {
             </strong>{" "}
             {course.Code}
           </p>
+
+          {!enroll && userDetail.profession == "student" && (
+            <button
+              onClick={handleEnrollment}
+              className="relative text-sm px-5 flex justify-between items-center py-2 font-serif text-white bg-gradient-to-r from-purple-600 via-sky-700 to-blue-500 rounded-md shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-sky-400 focus:ring-offset-2 active:scale-95 transition-all duration-300 ease-in-out overflow-hidden group"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-sky-400 to-purple-600 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-20"></span>
+
+              <span className="relative z-10 group-hover:text-yellow-300 transition-colors duration-300 ease-in-out">
+                Enroll
+              </span>
+
+              <CgMathPlus className="relative z-10 text-xl transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110" />
+            </button>
+          )}
         </div>
-        {userDetail.profession === "professor" ? (
+        {userDetail.profession === "professor" &&
+        userDetail?._id === course.addedBy ? (
           <div className="flex items-center gap-10">
             <button
               onClick={handleDialogOpen}
@@ -189,7 +271,9 @@ const CourseDetails = () => {
             <button
               onClick={handleCreateTestDialogOpen}
               className={`text-sm ${
-                !background ? "bg-red-500 text-white shadow-sm shadow-white" : "bg-red-700 text-white"
+                !background
+                  ? "bg-red-500 text-white shadow-sm shadow-white"
+                  : "bg-red-700 text-white"
               } px-6 py-1 rounded-sm`}
             >
               Create Test

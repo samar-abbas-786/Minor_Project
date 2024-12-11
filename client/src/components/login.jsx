@@ -5,11 +5,14 @@ import axios from "axios";
 import { Context } from "@/context/authContext";
 import { MdEmail } from "react-icons/md";
 import { MdLock } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { authorized, setAuthorized, setUserDetails,userDetail } = useContext(Context);
+  const { authorized, setAuthorized, setUserDetails, userDetail, isProfile } =
+    useContext(Context);
   const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
   const [profile, setProfile] = useState(
@@ -37,22 +40,26 @@ const Login = () => {
         JSON.stringify(response.data.user)
       );
       setUserDetails(user);
+
       setAuthorized(true);
       setEmail("");
       setPassword("");
+      {
+        isProfile ? navigate("/") : navigate("/CreateProfilePage");
+      }
       setMessage(response.data.message);
       setDescription(response.data.description);
     } catch (error) {
       console.error("error", error);
       setAuthorized(false);
-      setMessage(response.data.message);
-      setDescription(response.data.description);
+      // setMessage(response.data.message);
+      // setDescription(response.data.description);
     }
   };
 
-  if (authorized) {
-    return <Navigate to="/" />;
-  }
+  // if (authorized) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div className="w-full max-h-screen flex">

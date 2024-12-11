@@ -6,17 +6,10 @@ import { IoSunny } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
-import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
-  const {
-    background,
-    setBackground,
-    authorized,
-    setAuthorized,
-    userDetail,
-    profilePicture,
-  } = useContext(Context);
+  const { background, setBackground, authorized, userDetail, profilePicture } =
+    useContext(Context);
 
   const [show, setShow] = useState(false);
 
@@ -39,61 +32,63 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 items-center">
-            <Link
-              to="/"
-              className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-            >
-              Home
-            </Link>
+          {authorized && (
+            <div className="hidden md:flex space-x-6 items-center">
+              <Link
+                to="/"
+                className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+              >
+                Home
+              </Link>
 
-            {userDetail?.profession === "student" && (
-              <>
-                <Link
-                  to="/ShowInstructions"
-                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-                >
-                  Show Instruction
-                </Link>
-                <Link
-                  to="/take-test"
-                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-                >
-                  Attempt Test
-                </Link>
-              </>
-            )}
+              {userDetail?.profession === "student" && (
+                <>
+                  <Link
+                    to="/ShowInstructions"
+                    className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  >
+                    Show Instruction
+                  </Link>
+                  <Link
+                    to="/take-test"
+                    className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  >
+                    Attempt Test
+                  </Link>
+                </>
+              )}
 
-            {userDetail?.profession !== "student" && (
-              <>
-                <Link
-                  to="/AddInstructions"
-                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-                >
-                  Add Instruction
-                </Link>
-                <Link
-                  to="/add-question"
-                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-                >
-                  Add Questions
-                </Link>
-                <Link
-                  to="/AddCourse"
-                  className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-                >
-                  Add Courses
-                </Link>
-              </>
-            )}
+              {userDetail?.profession !== "student" && (
+                <>
+                  <Link
+                    to="/AddInstructions"
+                    className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  >
+                    Add Instruction
+                  </Link>
+                  <Link
+                    to="/add-question"
+                    className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  >
+                    Add Questions
+                  </Link>
+                  <Link
+                    to="/AddCourse"
+                    className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+                  >
+                    Add Courses
+                  </Link>
+                </>
+              )}
 
-            <Link
-              to="/showCourseList"
-              className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
-            >
-              Course List
-            </Link>
-          </div>
+              <Link
+                to="/showCourseList"
+                className="text-white font-medium text-sm md:text-base hover:text-slate-400 transition duration-200 ease-in-out transform hover:scale-105"
+              >
+                Course List
+              </Link>
+            </div>
+          )}
 
           {/* User Profile and Theme Toggle */}
           <div className="flex space-x-4 items-center">
@@ -151,69 +146,71 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`${show ? "block" : "hidden"} md:hidden`}>
-        <div
-          className={`px-2 pt-2 pb-3 space-y-1 ${
-            background
-              ? "bg-gradient-to-r from-[#2CA4AB] to-[#67B26F]"
-              : "bg-slate-800"
-          }`}
-        >
-          <Link
-            to="/"
-            className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+      {authorized && (
+        <div className={`${show ? "block" : "hidden"} md:hidden`}>
+          <div
+            className={`px-2 pt-2 pb-3 space-y-1 ${
+              background
+                ? "bg-gradient-to-r from-[#2CA4AB] to-[#67B26F]"
+                : "bg-slate-800"
+            }`}
           >
-            Home
-          </Link>
+            <Link
+              to="/"
+              className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+            >
+              Home
+            </Link>
 
-          {userDetail?.profession === "student" && (
-            <>
-              <Link
-                to="/ShowInstructions"
-                className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-              >
-                Show Instruction
-              </Link>
-              <Link
-                to="/take-test"
-                className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-              >
-                Attempt Test
-              </Link>
-            </>
-          )}
+            {userDetail?.profession === "student" && (
+              <>
+                <Link
+                  to="/ShowInstructions"
+                  className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+                >
+                  Show Instruction
+                </Link>
+                <Link
+                  to="/take-test"
+                  className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+                >
+                  Attempt Test
+                </Link>
+              </>
+            )}
 
-          {userDetail?.profession !== "student" && (
-            <>
-              <Link
-                to="/AddInstructions"
-                className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-              >
-                Add Instruction
-              </Link>
-              <Link
-                to="/add-question"
-                className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-              >
-                Add Questions
-              </Link>
-              <Link
-                to="/AddCourse"
-                className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-              >
-                Add Courses
-              </Link>
-            </>
-          )}
+            {userDetail?.profession !== "student" && (
+              <>
+                <Link
+                  to="/AddInstructions"
+                  className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+                >
+                  Add Instruction
+                </Link>
+                <Link
+                  to="/add-question"
+                  className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+                >
+                  Add Questions
+                </Link>
+                <Link
+                  to="/AddCourse"
+                  className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+                >
+                  Add Courses
+                </Link>
+              </>
+            )}
 
-          <Link
-            to="/showCourseList"
-            className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
-          >
-            Course List
-          </Link>
+            <Link
+              to="/showCourseList"
+              className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#2CA4AB] hover:bg-opacity-50 transition duration-200 ease-in-out"
+            >
+              Course List
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

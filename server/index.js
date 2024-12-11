@@ -8,6 +8,7 @@ const cors = require("cors");
 const instructionRouter = require("./routes/instructionRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const courseRoutes = require("./routes/courseRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 const path = require("path");
 
 require("dotenv").config();
@@ -26,6 +27,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/", (req, res) => {
@@ -36,6 +38,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/instruction", instructionRouter);
 app.use("/api/v1/questions", questionRoutes);
 app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 app.listen(PORT, () => {
   console.log(`App is Running at ${PORT}`);

@@ -6,38 +6,30 @@ import { Context } from "@/context/authContext";
 const AddCourse = () => {
   const [title, setTitle] = useState("");
   const [Code, setCode] = useState("");
-  const [fileUrl, setFileUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { userDetail } = useContext(Context);
 
-  // const handleFileChange = (e) => {
-  //   const selectedFile = e.target.files[0];
-  //   if (selectedFile && selectedFile.type === "application/pdf") {
-  //     setFileUrl(selectedFile);
-  //   } else {
-  //     console.error("Only PDF files are allowed");
-  //     alert("Please upload a valid PDF file.");
-  //     setFileUrl(null);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // if (!fileUrl) {
-    //   setErrorMessage("Please upload a PDF file.");
-    //   setIsSubmitting(false);
-    //   return;
-    // }
+    if (!userDetail?._id) {
+      setErrorMessage("User ID is missing. Please log in again.");
+      setIsSubmitting(false);
+      return;
+    }
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("Code", Code);
-    // formData.append("fileUrl", fileUrl);
-    formData.append("addedBy", userDetail._id);
+    formData.append("addedBy", userDetail._id.toString()); // Ensure _id is a string
+
+    // Debugging FormData content
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
 
     try {
       const response = await axios.post(
@@ -51,8 +43,12 @@ const AddCourse = () => {
       console.log("Course added successfully:", response.data);
       navigate("/");
     } catch (error) {
-      console.error("Error adding course:", error);
-      setErrorMessage("Failed to add course. Please try again later.");
+      const errorMsg =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to add course. Please try again later.";
+      console.error("Error adding course:", errorMsg);
+      setErrorMessage(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -72,6 +68,7 @@ const AddCourse = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
             placeholder="Enter the title"
             type="text"
+            name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -80,18 +77,12 @@ const AddCourse = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
             placeholder="Enter the Code"
             type="text"
+            name="Code"
             value={Code}
             onChange={(e) => setCode(e.target.value)}
             required
           />
-          {/* <input
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-            accept="application/pdf"
-            type="file"
-            name="fileUrl"
-            onChange={handleFileChange}
-            required
-          /> */}
+
           <button
             type="submit"
             className={`w-full py-2 mt-4 text-white rounded-lg font-semibold transition duration-300 ${
