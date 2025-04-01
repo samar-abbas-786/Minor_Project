@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Code } from "lucide-react";
 
 const AddQuestions = () => {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([
     {
       question: "",
@@ -62,7 +65,6 @@ const AddQuestions = () => {
         payload
       );
 
-      alert(response.data.message);
       setQuestions([
         {
           question: "",
@@ -71,6 +73,7 @@ const AddQuestions = () => {
           marks: 1,
         },
       ]);
+      navigate(`/course/${Code}`);
       setTimer(0);
     } catch (error) {
       console.error("Error adding questions:", error);

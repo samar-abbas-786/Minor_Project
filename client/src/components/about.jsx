@@ -7,13 +7,13 @@ const AboutSection = () => {
   const { background, setBackground } = useContext(Context);
   return (
     <div
+      id="about"
       className={`flex flex-col-reverse md:flex-row items-center justify-between min-h-screen ${
         background
           ? "bg-gradient-to-r from-[#f0f4f8] to-[#e9eef5]"
           : "bg-gray-900"
       } py-16 px-8 md:px-24`}
     >
-      {/* Left Side - Image */}
       <div className="w-full md:w-2/5">
         <div className="relative">
           <img
@@ -21,12 +21,10 @@ const AboutSection = () => {
             alt="About Us"
             className="rounded-xl shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105"
           />
-          {/* Decorative element for a modern look */}
           <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#2CA4AB] to-[#1D8D92] rounded-full opacity-70 blur-xl"></div>
         </div>
       </div>
 
-      {/* Right Side - Text */}
       <div className="w-full md:w-1/2 text-black mt-8 md:mt-0 md:pl-16">
         <h2
           className={`text-4xl md:text-3xl font-extrabold leading-tight mb-6 ${
@@ -53,8 +51,14 @@ const AboutSection = () => {
           with practical skills and real-world applications. Let’s shape the
           future together.
         </p>
-        <Link
-          to="/contact"
+        <button
+          onClick={() =>
+            window.scroll({
+              top: 1350,
+              left: 0,
+              behavior: "smooth",
+            })
+          }
           className={`inline-block text-white font-semibold py-3 px-6 rounded-full ${
             background
               ? "bg-gradient-to-r from-[#1D8D92] to-[#2CA4AB]"
@@ -62,7 +66,7 @@ const AboutSection = () => {
           } hover:from-[#262626] hover:to-[#1E1E1E] transition-all mb-6 duration-500 ease-in-out transform hover:scale-105 shadow-xl`}
         >
           Contact Us
-        </Link>
+        </button>
       </div>
     </div>
   );

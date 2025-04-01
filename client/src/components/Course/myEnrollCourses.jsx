@@ -48,12 +48,12 @@ const MyEnrollCourses = () => {
       <div className="text-center text-blue-600 font-bold">Loading...</div>
     );
 
-  if (error)
-    return (
-      <div className="text-center text-red-500 font-semibold">
-        Error: {error}
-      </div>
-    );
+  // if (error)
+  //   return (
+  //     <div className="text-center text-red-500 font-semibold">
+  //       Error: {error}
+  //     </div>
+  //   );
 
   return (
     <div>
@@ -63,20 +63,30 @@ const MyEnrollCourses = () => {
           My Enrolled Courses
         </h2>
         {enrollCourses.length === 0 ? (
-          <p className="text-center text-gray-500">No courses enrolled yet.</p>
+          <div className="text-center">
+            <p className="text-gray-500 mb-4">
+              You have not enrolled in any courses yet.
+            </p>
+            <Link
+              to="/showCourseList"
+              className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium transition-transform transform hover:bg-slate-800"
+            >
+              Browse Courses
+            </Link>
+          </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 mt-5 items-center justify-center">
             {enrollCourses.map((course, index) => (
               <div
                 key={index}
-                className="bg-white  shadow-md rounded-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition duration-300 w-72" // Reduced width here
+                className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition duration-300 w-72"
               >
                 <div
-                  className={` ${
+                  className={`${
                     background
                       ? "bg-gradient-to-r from-[#2CA4AB] to-[#2CA4AB]"
                       : "bg-slate-800"
-                  }  p-4 text-white`}
+                  } p-4 text-white`}
                 >
                   <h3 className="text-xl font-semibold truncate">
                     {course.title || "Unnamed Course"}
@@ -94,7 +104,7 @@ const MyEnrollCourses = () => {
                 <div className="bg-gray-50 p-3 text-right">
                   <Link
                     to={`/course/${course.Code}`}
-                    className="bg-white  flex justify-center text-black border-1 shadow-sm shadow-black border-black px-4 py-2 rounded-lg text-sm font-medium transition-transform transform hover:bg-slate-700  hover:text-white"
+                    className="bg-white flex justify-center text-black border-1 shadow-sm shadow-black border-black px-4 py-2 rounded-lg text-sm font-medium transition-transform transform hover:bg-slate-700 hover:text-white"
                   >
                     View Details
                   </Link>

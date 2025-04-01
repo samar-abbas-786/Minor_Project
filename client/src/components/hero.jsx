@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import heroImage from "../../public/hero2.jpg"; // Adjust the import path if needed
+import heroImage from "../../public/hero2.jpg";
 import { Context } from "@/context/authContext";
 
 const HeroSection = () => {
@@ -12,7 +12,6 @@ const HeroSection = () => {
         background ? "bg-gray-50" : "bg-slate-900"
       }`}
     >
-      {/* Left Side - Content */}
       <div
         className={`flex flex-col justify-center p-10 ${
           background ? "text-slate-900" : "text-[#fff]"
@@ -22,17 +21,17 @@ const HeroSection = () => {
           Elevate Your Learning Experience
         </h1>
         <p className="text-md sm:text-lg mb-8">
-          Join our interactive courses with live video classes and hands-on
-          tests led by expert teachers.
+        Join our immersive courses featuring interactive tests led by skilled educators.
+
         </p>
         <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
           <Link
-            to="/login"
+            to={authorized ? "/showCourseList" : "/login"}
             className={`text-white font-semibold py-3 px-6 rounded-full ${
               background
                 ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
                 : "bg-slate-900 shadow-sm shadow-white"
-            } hover:from-[#262626] hover:to-[#1E1E1E] transition-all duration-500 ease-in-out transform hover:scale-110 shadow-lg`}
+            }  transition-all duration-200 ease-in-out transform hover:scale-105 shadow-lg`}
           >
             Get Started
           </Link>
@@ -47,12 +46,11 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Right Side - Image */}
       <div className="md:w-full w-[90vw]  lg:w-2/5 h-[40vh] sm:h-[50vh] lg:h-[60vh] mt-8 lg:mt-0 lg:mr-12">
         <img
           src={heroImage}
           alt="Hero"
-          className="object-cover h-full w-full md:rounded-xl" // Ensure the image covers the area properly
+          className="object-cover h-full w-full md:rounded-xl"
         />
       </div>
     </div>

@@ -10,8 +10,8 @@ const CreateProfilePage = () => {
   const [yearOfStudy, setYearOfStudy] = useState("");
   const [branch, setBranch] = useState("");
   //   const [additionalInfo, setAdditionalInfo] = useState("");
-  const { userDetail, isProfile, setIsProfile } = useContext(Context);
-
+  const { userDetail, isProfile, setIsProfile, background } =
+    useContext(Context);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(collegeName, yearOfStudy, branch);
@@ -33,12 +33,9 @@ const CreateProfilePage = () => {
         }
       );
 
-      console.log(response);
-
       if (response.status === 201) {
-        alert("Profile Created Successfully!");
-        navigate("/profile");
         setIsProfile(true);
+        navigate("/profile");
       }
     } catch (error) {
       console.error(
@@ -55,7 +52,11 @@ const CreateProfilePage = () => {
       <div className="flex justify-center items-center p-6">
         <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8 grid grid-cols-1 gap-8">
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-[#2CA4AB]">
+            <h2
+              className={`text-3xl font-bold ${
+                background ? "text-[#2CA4AB]" : "text-slate-900"
+              }`}
+            >
               Create Your Profile
             </h2>
             <p className="text-gray-600 text-lg">
@@ -64,7 +65,9 @@ const CreateProfilePage = () => {
           </div>
           <button
             onClick={() => navigate("/")}
-            className="absolute bg-[#2CA4AB] text-white px-5 py-1 rounded-sm"
+            className={`absolute ${
+              background ? "bg-[#2CA4AB]" : "bg-slate-900"
+            }  text-white px-5 py-1 rounded-sm`}
           >
             Skip
           </button>
@@ -119,26 +122,14 @@ const CreateProfilePage = () => {
                   onChange={(e) => setBranch(e.target.value)}
                 />
               </div>
-
-              {/* Additional Information */}
-              {/* <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">
-                  Additional Information
-                </label>
-                <textarea
-                  rows="4"
-                  className="p-3 rounded-lg border bg-gray-50 focus:ring-2 focus:ring-[#2CA4AB] outline-none"
-                  placeholder="Anything else you'd like to add?"
-                  value={additionalInfo}
-                  onChange={(e) => setAdditionalInfo(e.target.value)}
-                />
-              </div> */}
             </div>
 
             <div className="mt-6 flex justify-center">
               <button
                 type="submit"
-                className="py-3 px-6 bg-[#2CA4AB] text-white font-semibold rounded-lg hover:bg-[#249499] transition-colors"
+                className={`py-3 px-6 ${
+                  background ? "bg-[#2CA4AB]" : "bg-slate-900"
+                } text-white font-semibold rounded-lg hover:opacity-95 transition-colors`}
               >
                 Create Profile
               </button>
@@ -146,12 +137,12 @@ const CreateProfilePage = () => {
           </form>
 
           <div className="mt-8 text-center">
-            <button
+            {/* <button
               onClick={() => navigate("/profile")}
               className="py-2 px-6 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition-colors"
             >
               Back to Profile
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -94,10 +94,14 @@ const ProfilePage = () => {
                 <span className="font-medium w-40">College Name:</span>
                 <span>{profile?.collegeName || "Not specified"}</span>
               </div>
-              <div className="flex items-center">
-                <span className="font-medium w-40">Year of Studying:</span>
-                <span>{profile?.yearOfStudying || "Not specified"}</span>
-              </div>
+              {userDetail.profession === "student" ? (
+                <div className="flex items-center">
+                  <span className="font-medium w-40">Year of Studying:</span>
+                  <span>{profile?.yearOfStudying || "Not specified"}</span>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="flex items-center">
                 <span className="font-medium w-40">Branch:</span>
                 <span>{profile?.branch || "Not specified"}</span>

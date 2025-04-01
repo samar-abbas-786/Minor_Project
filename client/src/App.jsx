@@ -17,6 +17,11 @@ import MyEnrollCourses from "./components/Course/myEnrollCourses";
 import CreateProfilePage from "./components/Profile/createProfilePage";
 import TeacherProfilePage from "./components/Profile/teacherProfile";
 import EnrolledStudentsPage from "./components/enrollStudentPage";
+import AttemptTest from "./components/testComponent/testAttempt";
+import Result from "./components/testComponent/result";
+import ContactUs from "./components/Contact";
+import ShowGallery from "./components/Gallery/showGallery";
+import AddGallery from "./components/Gallery/addGallery";
 function App() {
   return (
     <>
@@ -30,15 +35,23 @@ function App() {
           <Route path="/CreateProfilePage" element={<CreateProfilePage />} />
           <Route path="/EnrolledStudents" element={<EnrolledStudentsPage />} />
           <Route path="/add-instructions/:code" element={<AddInstructions />} />
-          <Route path="/ShowInstructions" element={<ShowInstructions />} />
+          <Route
+            path="/ShowInstructions/:code"
+            element={<ShowInstructions />}
+          />
           <Route path="/add-questions/:code" element={<AddQuestion />} />
           <Route path="/take-test" element={<StudentTest />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/AddCourse" element={<AddCourse />} />
+          <Route path="/result" element={<Result />} />
           <Route path="/MyEnrollCourses" element={<MyEnrollCourses />} />
           <Route path="/showCourseList" element={<ShowCourseList />} />
           <Route path="/teacherProfile" element={<TeacherProfilePage />} />
-
+          <Route path="/attemptTest/:code" element={<AttemptTest />} />
           <Route path="/course/:Code" element={<CourseDetails />} />
+          <Route path="/gallery" element={<ShowGallery />} />
+          <Route path="/add-gallery" element={<AddGallery />} />
+          AddGallery
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

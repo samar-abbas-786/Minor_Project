@@ -284,6 +284,7 @@ const CourseDetails = () => {
         )}
         {userDetail.profession === "student" ? (
           <button
+            onClick={() => navigate(`/ShowInstructions/${Code}`)}
             className={`text-sm ${
               !background
                 ? "bg-cyan-700 text-white shadow-sm shadow-white"

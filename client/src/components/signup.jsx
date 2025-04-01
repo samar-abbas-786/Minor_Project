@@ -6,7 +6,7 @@ import { Context } from "@/context/authContext";
 import { MdEmail, MdLock } from "react-icons/md"; // Import the email and lock icons
 import { FaUser } from "react-icons/fa";
 import { FaPenNib } from "react-icons/fa6";
-import { useToast } from "@/components/../hooks/use-toast";
+// import { useToast } from "@/components/../hooks/use-toast";
 // import { Button } from "@/components/ui/button"
 // import { ToastAction } from "@/components/ui/toast";
 // import { ToastContainer, toast } from "react-toastify";
@@ -44,8 +44,8 @@ const SignUp = () => {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       console.log(response);
       setAuthorized(true);
-      navigate("/");
-   
+      navigate("/CreateProfilePage");
+
       setName("");
       setEmail("");
       setPassword("");
@@ -53,10 +53,8 @@ const SignUp = () => {
     } catch (error) {
       console.error("error", error);
       setAuthorized(false);
-   
     }
   };
-  
 
   return (
     <div className="w-full max-h-screen flex">

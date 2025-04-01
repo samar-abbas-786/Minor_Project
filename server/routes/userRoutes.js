@@ -5,6 +5,7 @@ const {
   register,
   getUserById,
   getAllEnrolledStudent,
+  getAllTeacher,
 } = require("../controller/userController.js");
 
 const router = express.Router();
@@ -14,6 +15,7 @@ router.post("/login", login);
 router.get("/logout", logout);
 router.get("/getUserById", getUserById);
 router.get("/getEnrolled", getAllEnrolledStudent);
+router.get("/getAllTeacher", getAllTeacher);
 
 // router.get("/getuser", getUser);
 

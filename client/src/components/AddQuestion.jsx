@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FiPlusCircle } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const AddQuestions = () => {
   const { code } = useParams();
+  const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([
     {
@@ -21,33 +25,25 @@ const AddQuestions = () => {
     ]);
   };
 
-  const handleQuestionChange = (index, e) => {
-    const newQuestions = [...questions];
-    newQuestions[index].question = e.target.value;
+  const removeQuestionField = (index) => {
+    const newQuestions = questions.filter((_, idx) => idx !== index);
     setQuestions(newQuestions);
   };
 
-  const handleOptionChange = (index, optionIndex, e) => {
+  const handleInputChange = (index, field, value) => {
     const newQuestions = [...questions];
-    newQuestions[index].options[optionIndex] = e.target.value;
+    newQuestions[index][field] = value;
     setQuestions(newQuestions);
   };
 
-  const handleCorrectOptionChange = (index, e) => {
+  const handleOptionChange = (index, optionIndex, value) => {
     const newQuestions = [...questions];
-    newQuestions[index].correctOption = e.target.value;
-    setQuestions(newQuestions);
-  };
-
-  const handleMarksChange = (index, e) => {
-    const newQuestions = [...questions];
-    newQuestions[index].marks = e.target.value;
+    newQuestions[index].options[optionIndex] = value;
     setQuestions(newQuestions);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const payload = {
         questions: questions.map((q) => ({
@@ -63,7 +59,7 @@ const AddQuestions = () => {
         payload
       );
 
-      alert(response.data.message);
+      // alert(response.data.message);
       setQuestions([
         {
           question: "",
@@ -72,6 +68,7 @@ const AddQuestions = () => {
           marks: 1,
         },
       ]);
+      navigate(`/course/${code}`);
     } catch (error) {
       console.error("Error adding questions:", error);
       alert("Failed to add questions");
@@ -79,85 +76,101 @@ const AddQuestions = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-xl bg-white p-8 rounded-lg shadow-lg">
+    <div className="min-h-screen bg-gradient-to-r from-slate-200 to-slate-400 flex justify-center items-center p-6">
+      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
-          Add Multiple Questions
+          Add Questions
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {questions.map((q, index) => (
-            <div key={index} className="space-y-4">
+            <div
+              key={index}
+              className="relative bg-gray-100 rounded-lg shadow-md p-6 space-y-4"
+            >
+              <button
+                type="button"
+                onClick={() => removeQuestionField(index)}
+                className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                title="Remove this question"
+              >
+                <AiOutlineDelete size={20} />
+              </button>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-600">
                   Question {index + 1}
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-2 bg-gray-200 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="w-full px-4 py-2 bg-gray-200 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                   value={q.question}
-                  onChange={(e) => handleQuestionChange(index, e)}
+                  onChange={(e) =>
+                    handleInputChange(index, "question", e.target.value)
+                  }
                   required
                 />
               </div>
-
-              {q.options.map((opt, optIndex) => (
-                <div key={optIndex}>
-                  <label className="block mb-2 text-sm font-medium text-gray-600">
-                    Option {optIndex + 1}
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full mb-2 px-4 py-2 bg-gray-200 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                    value={opt}
-                    onChange={(e) => handleOptionChange(index, optIndex, e)}
-                    required
-                  />
-                </div>
-              ))}
-
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-600">
+                  Options
+                </label>
+                {q.options.map((opt, optIndex) => (
+                  <div key={optIndex} className="flex items-center space-x-3">
+                    <input
+                      type="text"
+                      className="w-full px-4 py-2 mt-1  bg-gray-200  border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                      value={opt}
+                      onChange={(e) =>
+                        handleOptionChange(index, optIndex, e.target.value)
+                      }
+                      required
+                    />
+                  </div>
+                ))}
+              </div>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-600">
                   Correct Option
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-2 bg-gray-200 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="w-full px-4 py-2 bg-gray-200 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                   value={q.correctOption}
-                  onChange={(e) => handleCorrectOptionChange(index, e)}
+                  onChange={(e) =>
+                    handleInputChange(index, "correctOption", e.target.value)
+                  }
                   required
                 />
               </div>
-
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-600">
                   Marks
                 </label>
                 <input
                   type="number"
-                  className="w-full px-4 py-2 bg-gray-200 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="w-full px-4 py-2 bg-gray-200 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                   value={q.marks}
-                  onChange={(e) => handleMarksChange(index, e)}
+                  onChange={(e) =>
+                    handleInputChange(index, "marks", e.target.value)
+                  }
                   required
                 />
               </div>
             </div>
           ))}
-
-          <div className="flex space-x-4">
-            <button
-              type="submit"
-              className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              Add Questions
-            </button>
-            <button
-              type="button"
-              onClick={addQuestionField}
-              className="w-full px-4 py-2 text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              Add More Questions
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={addQuestionField}
+            className="flex items-center justify-center w-full px-4 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:ring-2 focus:ring-green-500"
+          >
+            <FiPlusCircle className="mr-2" />
+            Add More Questions
+          </button>
+          <button
+            type="submit"
+            className="w-full px-4 py-3 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-500"
+          >
+            Submit Questions
+          </button>
         </form>
       </div>
     </div>

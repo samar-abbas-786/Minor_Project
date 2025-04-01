@@ -11,7 +11,7 @@ const createProfile = async (req, res) => {
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const newProfile = await Profile.create({
@@ -27,6 +27,7 @@ const createProfile = async (req, res) => {
       newProfile,
     });
   } catch (error) {
+    console.error("Error creating profile:", error.message);
     return res.status(500).json({
       message: "Server error",
       error: error.message,

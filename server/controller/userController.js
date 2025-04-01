@@ -128,6 +128,18 @@ const getAllEnrolledStudent = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 };
+const getAllTeacher = async (req, res) => {
+  try {
+    const teachers = await User.find({ profession: "professor" });
+    if (!teachers || teachers.length === 0) {
+      return res.status(404).json({ message: "No teachers found" });
+    }
+    res.status(200).json({ teachers });
+  } catch (error) {
+    console.error("Error fetching teachers:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 // const getUser = (req, res, next) => {
 //   const user = req.user;
@@ -142,4 +154,5 @@ module.exports = {
   register,
   getUserById,
   getAllEnrolledStudent,
+  getAllTeacher,
 };

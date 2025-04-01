@@ -1,7 +1,4 @@
-const {
-  addInstructions,
-  getInstruction,
-} = require("../controller/instructionController");
+const { addInstructions, getInstruction } = require("../controller/instructionController");
 const express = require("express");
 
 const router = express.Router();

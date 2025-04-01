@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   profession: {
     type: String,
     required: [true, "Please provide your profession!"],
-    enum: ["student", "professor"],
+    enum: ["student", "professor", "admin"],
     default: "student",
   },
   createdAt: {
