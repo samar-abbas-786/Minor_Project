@@ -24,9 +24,9 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4 h-16">
-          <Link to={"/"} className="flex items-center space-x-3">
+          <Link to={"/"} className="flex items-center space-x-3 font-mono">
             <IoSchool className="h-10 w-10 text-white transform transition-all duration-200 ease-in-out" />
-            <span className="text-white font-extrabold text-md md:text-2xl tracking-wide font-serif">
+            <span className="text-white  text-md md:text-2xl tracking-wide font-thin">
               Madarsa Dua <span className="text-white">Educational</span>
               <span className="text-yellow-400"> School</span>
             </span>
