@@ -45,7 +45,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       {
-        isProfile ? navigate("/") : navigate("/CreateProfilePage");
+        isProfile ? navigate("/") : navigate("/");
       }
       setMessage(response.data.message);
       setDescription(response.data.description);
