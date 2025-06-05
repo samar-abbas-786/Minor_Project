@@ -21,8 +21,8 @@ const HeroSection = () => {
           Elevate Your Learning Experience
         </h1>
         <p className="text-md sm:text-lg mb-8">
-        Join our immersive courses featuring interactive tests led by skilled educators.
-
+          Join our immersive courses featuring interactive tests led by skilled
+          educators.
         </p>
         <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
           <Link

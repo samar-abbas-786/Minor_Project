@@ -8,7 +8,7 @@ const TeacherProfilePage = () => {
   return (
     <div
       className={`min-h-screen ${
-        background ? "bg-gray-100 text-gray-800" : "bg-slate-950 text-white"
+        background ? "bg-gray-100 text-gray-800" : "bg-slate-900 text-white"
       }`}
     >
       <Navbar />

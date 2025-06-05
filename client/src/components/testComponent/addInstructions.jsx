@@ -76,7 +76,7 @@ const AddInstructions = () => {
                   <button
                     onClick={handleAdd}
                     type="button"
-                    className="px-4 py-2 bg-black text-white font-medium rounded-md hover:bg-slate-950 transition"
+                    className="px-4 py-2 bg-black text-white font-medium rounded-md hover:bg-slate-900 transition"
                   >
                     Add
                   </button>

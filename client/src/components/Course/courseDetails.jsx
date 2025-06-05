@@ -262,7 +262,7 @@ const CourseDetails = () => {
               onClick={handleDialogOpen}
               className={`text-sm ${
                 !background
-                  ? "bg-slate-950 text-white shadow-sm shadow-white"
+                  ? "bg-slate-900 text-white shadow-sm shadow-white"
                   : "bg-[#2CA4AB] text-white"
               } px-6 py-1 rounded-sm`}
             >
