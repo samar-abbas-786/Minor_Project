@@ -4,6 +4,7 @@ import AboutSection from "./about";
 import ContactUs from "./Contact";
 import Footer from "./footer";
 import MentorsSection from "./mentor";
+import FaqSection from "./FAQ";
 const layout = () => {
   return (
     <div className="top-0">
@@ -11,6 +12,7 @@ const layout = () => {
       <AboutSection />
       <MentorsSection />
       <ContactUs />
+      <FaqSection />
       <Footer />
     </div>
   );

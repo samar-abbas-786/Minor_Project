@@ -41,12 +41,12 @@ const ContactUs = () => {
   return (
     <div
       className={`flex items-center justify-center min-h-screen px-6 py-20 transition-all duration-300 ${
-        background ? "bg-white" : "bg-gray-900"
+        background ? "bg-white" : "bg-gray-950"
       }`}
     >
       <div
         className={`w-full max-w-3xl p-8 rounded-2xl shadow-2xl transition-all duration-300 ease-in-out ${
-          background ? "bg-white" : "bg-gray-800"
+          background ? "bg-white" : "bg-gray-950"
         }`}
       >
         <h2

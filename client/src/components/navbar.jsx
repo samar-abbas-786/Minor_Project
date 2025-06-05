@@ -19,7 +19,7 @@ const Navbar = () => {
       className={`${
         background
           ? "bg-gradient-to-r from-cyan-500 to-teal-500"
-          : "bg-slate-950"
+          : "bg-gray-950"
       }  w-full shadow-lg shadow-white`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">

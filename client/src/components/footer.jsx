@@ -18,7 +18,7 @@ const Footer = () => {
       className={`${
         background
           ? "bg-gradient-to-r from-[#f0f4f8] to-[#e9eef5] text-gray-800"
-          : "bg-gray-900 text-gray-400"
+          : "bg-gray-950 text-gray-400"
       } py-10 transition-all`}
     >
       <div className="container mx-auto px-8">
@@ -42,7 +42,7 @@ const Footer = () => {
           <div>
             <h4
               className={`text-xl font-semibold mb-4 ${
-                background ? "text-gray-900" : "text-white"
+                background ? "text-gray-950" : "text-white"
               }`}
             >
               Contact Us

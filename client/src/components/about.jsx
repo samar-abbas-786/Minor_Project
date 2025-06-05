@@ -11,7 +11,7 @@ const AboutSection = () => {
       className={`flex flex-col-reverse md:flex-row items-center justify-between min-h-screen ${
         background
           ? "bg-gradient-to-r from-[#f0f4f8] to-[#e9eef5]"
-          : "bg-gray-900"
+          : "bg-gray-950"
       } py-16 px-8 md:px-24`}
     >
       <div className="w-full md:w-2/5">

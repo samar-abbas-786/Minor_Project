@@ -44,7 +44,7 @@ const MentorsSection = () => {
           <div
             key={index}
             className={`rounded-xl shadow-lg p-6 text-center transform transition duration-500 hover:scale-105 ${
-              background ? "bg-white" : "bg-gray-800"
+              background ? "bg-white" : "bg-gray-900"
             }`}
           >
             <img
