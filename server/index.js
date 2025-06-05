@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(
   cors({
     methods: ["GET", "PUT", "POST", "DELETE"],
-    origin: "*",
+    origin: "https://edupi-samar786.vercel.app",
     credentials: true,
   })
 );
