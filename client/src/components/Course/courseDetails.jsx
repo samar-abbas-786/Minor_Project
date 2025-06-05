@@ -196,13 +196,13 @@ const CourseDetails = () => {
   return (
     <div
       className={`w-[100vw] h-[100%] ${
-        !background ? "bg-slate-900" : "bg-[#fff]"
+        !background ? "bg-slate-950" : "bg-[#fff]"
       } h-[100vh]`}
     >
       <Navbar />
       <div
         className={`${
-          !background ? "bg-slate-900 text-white" : "bg-[#fff] text-[#2CA4AB]"
+          !background ? "bg-slate-950 text-white" : "bg-[#fff] text-[#2CA4AB]"
         } p-6 md:p-10 lg:p-14 h-full w-full  max-w-6xl mx-auto`}
       >
         <h1
@@ -215,7 +215,7 @@ const CourseDetails = () => {
         <div
           className={` w-max p-5 my-8 ${
             !background
-              ? "bg-slate-900 shadow-sm shadow-white"
+              ? "bg-slate-950 shadow-sm shadow-white"
               : "bg-[#fff] text-black shadow-sm shadow-black"
           } rounded-md `}
         >
@@ -262,7 +262,7 @@ const CourseDetails = () => {
               onClick={handleDialogOpen}
               className={`text-sm ${
                 !background
-                  ? "bg-slate-900 text-white shadow-sm shadow-white"
+                  ? "bg-slate-950 text-white shadow-sm shadow-white"
                   : "bg-[#2CA4AB] text-white"
               } px-6 py-1 rounded-sm`}
             >

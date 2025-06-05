@@ -8,14 +8,14 @@ const TeacherProfilePage = () => {
   return (
     <div
       className={`min-h-screen ${
-        background ? "bg-gray-100 text-gray-800" : "bg-slate-900 text-white"
+        background ? "bg-gray-100 text-gray-800" : "bg-slate-950 text-white"
       }`}
     >
       <Navbar />
       <div className="flex items-start justify-center p-6">
         <div
           className={`w-full max-w-6xl ${
-            background ? "bg-white" : "bg-slate-900 shadow-md shadow-gray-100"
+            background ? "bg-white" : "bg-slate-950 shadow-md shadow-gray-100"
           } shadow-lg rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8`}
         >
           <div

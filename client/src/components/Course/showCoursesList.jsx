@@ -30,7 +30,7 @@ const ShowCourseList = () => {
       <Navbar />
       <div
         className={`${
-          !background ? "bg-slate-900" : "bg-[#f6f6f6]"
+          !background ? "bg-slate-950" : "bg-[#f6f6f6]"
         } min-h-screen p-8 flex flex-col items-center`}
       >
         <h1

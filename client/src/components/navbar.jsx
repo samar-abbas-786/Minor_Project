@@ -19,10 +19,10 @@ const Navbar = () => {
       className={`${
         background
           ? "bg-gradient-to-r from-cyan-500 to-teal-500"
-          : "bg-slate-900"
-      } shadow-lg w-full`}
+          : "bg-slate-950"
+      }  w-full shadow-lg shadow-white`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="flex justify-between items-center py-4 h-16">
           <Link to={"/"} className="flex items-center space-x-3 font-mono">
             <IoSchool className="h-10 w-10 text-white transform transition-all duration-200 ease-in-out" />
@@ -98,7 +98,7 @@ const Navbar = () => {
                   className={`text-white font-medium py-1 px-4 md:py-2 md:px-6 hidden md:block rounded-full ${
                     background
                       ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
-                      : "bg-slate-900 shadow-sm shadow-white"
+                      : "bg-slate-950 shadow-sm shadow-white"
                   } hover:from-[#262626] hover:to-[#1E1E1E] transition-all duration-500 ease-in-out transform hover:scale-105 shadow-lg`}
                 >
                   Login

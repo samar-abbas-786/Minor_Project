@@ -76,7 +76,7 @@ const AddInstructions = () => {
                   <button
                     onClick={handleAdd}
                     type="button"
-                    className="px-4 py-2 bg-black text-white font-medium rounded-md hover:bg-slate-900 transition"
+                    className="px-4 py-2 bg-black text-white font-medium rounded-md hover:bg-slate-950 transition"
                   >
                     Add
                   </button>
@@ -85,7 +85,7 @@ const AddInstructions = () => {
                 <button
                   onClick={onHandleSubmit}
                   className={`w-full py-3 ${
-                    background ? "bg-[#2CA4AB]" : "bg-slate-900"
+                    background ? "bg-[#2CA4AB]" : "bg-slate-950"
                   } text-white font-medium rounded-md hover:scale-105 transition`}
                   type="submit"
                 >

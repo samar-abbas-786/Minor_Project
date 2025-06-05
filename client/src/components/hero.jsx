@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <div
       className={`flex flex-col lg:flex-row items-center justify-between h-[100vh] md:h-[87vh] ${
-        background ? "bg-gray-50" : "bg-slate-900"
+        background ? "bg-gray-50" : "bg-slate-950"
       }`}
     >
       <div
@@ -30,7 +30,7 @@ const HeroSection = () => {
             className={`text-white font-semibold py-3 px-6 rounded-full ${
               background
                 ? "bg-gradient-to-r from-[#2CA4AB] to-[#1D8D92]"
-                : "bg-slate-900 shadow-sm shadow-white"
+                : "bg-slate-950 shadow-sm shadow-white"
             }  transition-all duration-200 ease-in-out transform hover:scale-105 shadow-lg`}
           >
             Get Started

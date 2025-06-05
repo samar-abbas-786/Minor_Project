@@ -54,14 +54,14 @@ const ProfilePage = () => {
   return (
     <div
       className={`min-h-screen ${
-        background ? "bg-gray-100 text-gray-800" : "bg-slate-900 text-white"
+        background ? "bg-gray-100 text-gray-800" : "bg-slate-950 text-white"
       }`}
     >
       <Navbar />
       <div className="flex items-start justify-center p-6">
         <div
           className={`w-full max-w-6xl ${
-            background ? "bg-white" : "bg-slate-900 shadow-md shadow-gray-100"
+            background ? "bg-white" : "bg-slate-950 shadow-md shadow-gray-100"
           } shadow-lg rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8`}
         >
           <div
@@ -132,7 +132,7 @@ const ProfilePage = () => {
                   className={`px-5 py-2 rounded-md font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-md border-2 ${
                     background
                       ? "bg-orange-500 text-teal-50 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-400"
-                      : "bg-slate-900 text-teal-100 hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-500"
+                      : "bg-slate-950 text-teal-100 hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-500"
                   }`}
                   href="/MyEnrollCourses"
                 >

@@ -30,7 +30,7 @@ const Footer = () => {
                 background ? "text-gray-900" : "text-white"
               } mb-4`}
             >
-              Madarsa Dua Educational School
+              EduPI
             </h3>
             <p>
               Delivering exceptional support to help you reach your aspirations.
@@ -109,7 +109,7 @@ const Footer = () => {
           <p>
             © {new Date().getFullYear()}{" "}
             <b>
-              <i>Madarsa Dua Educational School</i>
+              <i>EduPI</i>
             </b>
             . All rights reserved.
           </p>

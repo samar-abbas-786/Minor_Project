@@ -66,7 +66,7 @@ const CreateProfilePage = () => {
           <button
             onClick={() => navigate("/")}
             className={`absolute ${
-              background ? "bg-[#2CA4AB]" : "bg-slate-900"
+              background ? "bg-[#2CA4AB]" : "bg-slate-950"
             }  text-white px-5 py-1 rounded-sm`}
           >
             Skip
@@ -128,7 +128,7 @@ const CreateProfilePage = () => {
               <button
                 type="submit"
                 className={`py-3 px-6 ${
-                  background ? "bg-[#2CA4AB]" : "bg-slate-900"
+                  background ? "bg-[#2CA4AB]" : "bg-slate-950"
                 } text-white font-semibold rounded-lg hover:opacity-95 transition-colors`}
               >
                 Create Profile

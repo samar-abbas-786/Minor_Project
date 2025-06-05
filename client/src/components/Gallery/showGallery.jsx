@@ -29,7 +29,7 @@ const ShowGallery = () => {
   return (
     <div
       className={`${
-        background ? "bg-gray-50 text-gray-900" : "bg-slate-900 text-white"
+        background ? "bg-gray-50 text-gray-900" : "bg-slate-950 text-white"
       } min-h-screen`}
     >
       <Navbar />

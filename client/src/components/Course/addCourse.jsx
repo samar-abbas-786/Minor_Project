@@ -88,7 +88,7 @@ const AddCourse = () => {
             className={`w-full py-2 mt-4 text-white rounded-lg font-semibold transition duration-300 ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-slate-900 hover:bg-slate-800"
+                : "bg-slate-950 hover:bg-slate-800"
             }`}
             disabled={isSubmitting}
           >
