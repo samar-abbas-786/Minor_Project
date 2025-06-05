@@ -15,7 +15,7 @@ const AttemptTest = () => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/questions/all",
+          "https://backend-edupi-2.onrender.com/api/v1/questions/all",
           { params: { code } }
         );
         setQuestions(response.data.data);
@@ -36,7 +36,7 @@ const AttemptTest = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/questions/submit",
+        "https://backend-edupi-2.onrender.com/api/v1/questions/submit",
         { answers },
         { params: { code } }
       );

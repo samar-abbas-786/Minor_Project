@@ -61,7 +61,7 @@ const AddQuestions = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/questions/add",
+        "https://backend-edupi-2.onrender.com/api/v1/questions/add",
         payload
       );
 

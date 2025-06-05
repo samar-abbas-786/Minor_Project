@@ -45,7 +45,7 @@ const CourseDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/course/enrolled",
+        "https://backend-edupi-2.onrender.com/api/v1/course/enrolled",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -70,7 +70,7 @@ const CourseDetails = () => {
 
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/course/getEnrollByCourseId",
+        "https://backend-edupi-2.onrender.com/api/v1/course/getEnrollByCourseId",
         {
           params: {
             courseId: course._id,
@@ -99,7 +99,7 @@ const CourseDetails = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/course/singleCourse/${Code}`
+        `https://backend-edupi-2.onrender.com/api/v1/course/singleCourse/${Code}`
       );
       setCourse(response.data.course[0]);
       setLoading(false);
@@ -112,7 +112,7 @@ const CourseDetails = () => {
   const getContent = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/course/getContent/${Code}`
+        `https://backend-edupi-2.onrender.com/api/v1/course/getContent/${Code}`
       );
       setCourseContent(response.data.content || []);
     } catch (error) {
@@ -128,7 +128,7 @@ const CourseDetails = () => {
   const getProfessor = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/user/getUserById?id=${course.addedBy}`
+        `https://backend-edupi-2.onrender.com/api/v1/user/getUserById?id=${course.addedBy}`
       );
       setProfessor(response.data.user);
       setProf(response.data.user);
@@ -168,7 +168,7 @@ const CourseDetails = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/v1/course/addContent/${Code}`,
+        `https://backend-edupi-2.onrender.com/api/v1/course/addContent/${Code}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -324,7 +324,7 @@ const CourseDetails = () => {
                   {content.topic}
                 </h3>
                 <a
-                  href={`http://localhost:5000/uploads/${content.fileName}`}
+                  href={`https://backend-edupi-2.onrender.com/uploads/${content.fileName}`}
                   className="text-blue-400 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"

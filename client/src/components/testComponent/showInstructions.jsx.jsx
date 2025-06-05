@@ -13,7 +13,7 @@ const ShowInstructions = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/instruction/getInstruction`,
+        `https://backend-edupi-2.onrender.com/api/v1/instruction/getInstruction`,
         {
           params: { code },
           withCredentials: true,

@@ -14,7 +14,7 @@ const ProfilePage = () => {
 
   const getAllCourses = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/course/getEnrolledCourses",
+      "https://backend-edupi-2.onrender.com/api/v1/course/getEnrolledCourses",
       { params: { userId: userDetail._id } }
     );
     if (!response) {
@@ -34,7 +34,7 @@ const ProfilePage = () => {
 
   const getProfile = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/profile/getProfileByUserId",
+      "https://backend-edupi-2.onrender.com/api/v1/profile/getProfileByUserId",
       {
         params: {
           userId: userDetail._id,

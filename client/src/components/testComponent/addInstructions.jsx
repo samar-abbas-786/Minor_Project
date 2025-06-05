@@ -23,7 +23,7 @@ const AddInstructions = () => {
     console.log(inst);
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/v1/instruction/addInstruction",
+      "https://backend-edupi-2.onrender.com/api/v1/instruction/addInstruction",
       {
         instruction: inst,
         uploadedBy: userDetail._id,

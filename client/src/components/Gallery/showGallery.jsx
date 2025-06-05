@@ -13,7 +13,7 @@ const ShowGallery = () => {
     const fetchGallery = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/Gallery/getAllPost"
+          "https://backend-edupi-2.onrender.com/api/v1/Gallery/getAllPost"
         );
         setGallery(response.data.gallery);
       } catch (err) {
@@ -53,7 +53,7 @@ const ShowGallery = () => {
                   className="rounded-lg shadow-lg overflow-hidden"
                 >
                   <img
-                    src={`http://localhost:5000/uploads/${item.picture}`}
+                    src={`https://backend-edupi-2.onrender.com/uploads/${item.picture}`}
                     alt={item.title}
                     className="w-full h-64 object-fit"
                   />

@@ -13,7 +13,7 @@ const ShowCourseList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/course/listAllCourses"
+          "https://backend-edupi-2.onrender.com/api/v1/course/listAllCourses"
         );
         // console.log("Response:", response.data);
         setData(response.data.data);

@@ -32,7 +32,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/register",
+        "https://backend-edupi-2.onrender.com/api/v1/user/register",
         { name, email, password, profession },
         {
           headers: {

@@ -19,7 +19,7 @@ const MyEnrollCourses = () => {
 
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/api/v1/course/getEnrolledCourses",
+        "https://backend-edupi-2.onrender.com/api/v1/course/getEnrolledCourses",
         { params: { userId: userDetail._id } }
       );
       console.log(response);

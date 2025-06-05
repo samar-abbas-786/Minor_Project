@@ -14,7 +14,7 @@ const EnrolledStudentsPage = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:5000/api/v1/user/getEnrolled",
+          "https://backend-edupi-2.onrender.com/api/v1/user/getEnrolled",
           { params: { userId: userDetail._id } }
         );
         setStudents(response.data.students || []);
