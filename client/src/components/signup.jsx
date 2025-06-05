@@ -44,7 +44,7 @@ const SignUp = () => {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       console.log(response);
       setAuthorized(true);
-      navigate("/CreateProfilePage");
+      navigate("/");
 
       setName("");
       setEmail("");
