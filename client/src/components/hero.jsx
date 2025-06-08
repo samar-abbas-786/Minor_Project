@@ -9,7 +9,7 @@ const HeroSection = () => {
 
   return (
     <div
-      className={`flex flex-col lg:flex-row items-center justify-between h-[100vh] md:h-[90vh] px-6 md:px-16 transition-all duration-300 ${
+      className={`flex flex-col lg:flex-row items-center pt-10 mb-20 md:pt-0 md:mb-0 justify-between h-[100vh] md:h-[90vh] px-6 md:px-16 transition-all duration-300 ${
         background ? "bg-gray-50" : "bg-gray-950"
       }`}
     >
@@ -26,7 +26,7 @@ const HeroSection = () => {
           Elevate Your <span className="text-[#2CA4AB]">Learning</span>{" "}
           Experience
         </h1>
-        <p className="text-lg sm:text-xl mb-10 leading-relaxed">
+        <p className="text-lg sm:text-xl mb-10 text-start leading-relaxed">
           Join our immersive courses featuring interactive tests, personalized
           learning paths, and expert mentorship — all designed to help you grow.
         </p>
