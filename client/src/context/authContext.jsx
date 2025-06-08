@@ -6,6 +6,7 @@ const AppWrapper = ({ children }) => {
   const [authorized, setAuthorized] = useState(false);
   const [prof, setProf] = useState();
   const [background, setBackground] = useState(true);
+
   const [userDetail, setUserDetails] = useState({});
   const [course, setCourse] = useState(null);
   const [isProfile, setIsProfile] = useState(false);

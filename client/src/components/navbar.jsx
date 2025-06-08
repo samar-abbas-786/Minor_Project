@@ -26,10 +26,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center py-4 h-16">
           <Link to={"/"} className="flex items-center space-x-3 font-mono">
             <IoSchool className="h-10 w-10 text-white transform transition-all duration-200 ease-in-out" />
-            {/* <span className="text-white  text-md md:text-2xl tracking-wide font-thin">
-              Madarsa Dua <span className="text-white">Educational</span>
-              <span className="text-yellow-400"> School</span>
-            </span> */}
+
             <span className="text-white  text-md md:text-2xl tracking-wide font-bold">
               Edu
               <span className="text-yellow-400">PI</span>

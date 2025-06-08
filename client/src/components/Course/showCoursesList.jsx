@@ -24,6 +24,22 @@ const ShowCourseList = () => {
 
     fetchData();
   }, []);
+  if (data.length == 0) {
+    return (
+    <>
+  <Navbar />
+  <div className="flex flex-col items-center justify-center h-[70vh] text-center px-4">
+    <h2 className="text-3xl font-bold text-gray-800 mb-3 animate-pulse">
+      📚 No Course Available
+    </h2>
+    <p className="text-gray-500 text-lg">
+      Please check back later or reach out for more information.
+    </p>
+  </div>
+</>
+
+    );
+  }
 
   return (
     <div>
@@ -40,51 +56,53 @@ const ShowCourseList = () => {
         >
           All Available Courses
         </h1>
+
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full max-w-6xl">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className={`${
-                !background
-                  ? "bg-slate-800 hover:bg-slate-700"
-                  : "bg-gray-50 hover:bg-gray-200"
-              } p-5 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 `}
-            >
-              <h2
-                className={`text-2xl font-semibold ${
-                  !background ? "text-white" : "text-black"
-                }  mb-2 truncate`}
+          {data &&
+            data.map((item, index) => (
+              <div
+                key={index}
+                className={`${
+                  !background
+                    ? "bg-slate-800 hover:bg-slate-700"
+                    : "bg-gray-50 hover:bg-gray-200"
+                } p-5 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 `}
               >
-                {item.title}
-              </h2>
-              <p
-                className={`text-sm ${
-                  !background ? "text-white" : "text-slate-900"
-                } mb-4`}
-              >
-                Code: {item.Code}
-              </p>
-              <Link
-                to={`/course/${item.Code}`}
-                className="flex items-center justify-between"
-              >
-                <Link
-                  className={`${
-                    !background
-                      ? "text-blue-300 hover:text-blue-500"
-                      : "text-[#157666] hover:text-black"
-                  }  text-md `}
-                  to={`/course/${item.Code}`}
+                <h2
+                  className={`text-2xl font-semibold ${
+                    !background ? "text-white" : "text-black"
+                  }  mb-2 truncate`}
                 >
-                  View Course Details
+                  {item.title}
+                </h2>
+                <p
+                  className={`text-sm ${
+                    !background ? "text-white" : "text-slate-900"
+                  } mb-4`}
+                >
+                  Code: {item.Code}
+                </p>
+                <Link
+                  to={`/course/${item.Code}`}
+                  className="flex items-center justify-between"
+                >
+                  <Link
+                    className={`${
+                      !background
+                        ? "text-blue-300 hover:text-blue-500"
+                        : "text-[#157666] hover:text-black"
+                    }  text-md `}
+                    to={`/course/${item.Code}`}
+                  >
+                    View Course Details
+                  </Link>
+                  <BsArrowRightShort
+                    className={`${!background ? "text-white" : "text-black"}`}
+                    size={30}
+                  />
                 </Link>
-                <BsArrowRightShort
-                  className={`${!background ? "text-white" : "text-black"}`}
-                  size={30}
-                />
-              </Link>
-            </div>
-          ))}
+              </div>
+            ))}
         </div>
       </div>
     </div>
