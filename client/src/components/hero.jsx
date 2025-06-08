@@ -24,11 +24,11 @@ const HeroSection = () => {
           background ? "text-slate-900" : "text-white"
         }`}
       >
-        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-6 tracking-tight">
-          Elevate Your <span className="text-[#2CA4AB]">Learning</span>{" "}
+        <h1 className="text-4xl sm:text-5xl font-extrabold  leading-tight mb-6 tracking-tight">
+          Elevate Your <span className="text-[#2CA4AB] ">Learning</span>{" "}
           Experience
         </h1>
-        <p className="text-lg sm:text-xl mb-10 text-start leading-relaxed">
+        <p className="md:text-lg sm:text-xl mb-10 text-md leading-relaxed">
           Join our immersive courses featuring interactive tests, personalized
           learning paths, and expert mentorship — all designed to help you grow.
         </p>
