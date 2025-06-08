@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../../public/hero2.jpg";
+// import heroImage from "../../public/madarsa.webp";
+
 import { Context } from "@/context/authContext";
 import { motion } from "framer-motion";
 
